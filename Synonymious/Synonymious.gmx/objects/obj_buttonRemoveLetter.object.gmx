@@ -90,7 +90,7 @@ if (instance_number(obj_letterBox) &gt; string_length(Game.answer))
         ds_list_delete(list,ds_list_find_index(list,char));
     }
     
-    var char = ds_list_find_value(list,random(ds_list_size(list)));
+    var char = ds_list_find_value(list,irandom(ds_list_size(list)-1));
     if (is_undefined(char))
     {
         exit;

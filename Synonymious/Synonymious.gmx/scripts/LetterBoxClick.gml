@@ -1,7 +1,12 @@
 var dontChangeColor = false;
+var targetInputBox = -1;
 if (argument_count > 1)
 {
-    dontChangeColor = argument[0];
+    dontChangeColor = argument[1];
+    if (argument_count > 2)
+    {
+        targetInputBox = argument[2];
+    }
 }
 
 with (argument[0])
@@ -10,34 +15,21 @@ with (argument[0])
     {
         if (x == originalXPos && y == originalYPos)
         {
-            var allFilled = true;
-            var letterSet = false;
             for (var i=0;i<array_length_1d(Game.inputBox);i++)
             {
-                if (Game.inputBox[i].letter == "")
+                if ( (Game.inputBox[i].letter == "" && targetInputBox == -1) || (targetInputBox == Game.inputBox[i] && targetInputBox != -1) )
                 {
-                    if (!letterSet)
-                    {
-                        Game.inputBox[i].letter = letter;
-                        Game.inputBox[i].letterBox = id;
-                        toXPos = Game.inputBox[i].x;
-                        toYPos = Game.inputBox[i].y;
-                        fromXPos = x;
-                        fromYPos = y;
-                        inputBox = Game.inputBox[i];
-                        letterSet = true;
-                    }
-                    else
-                    {
-                        allFilled = false;
-                        break;
-                    }
+                    Game.inputBox[i].letter = letter;
+                    Game.inputBox[i].letterBox = id;
+                    toXPos = Game.inputBox[i].x;
+                    toYPos = Game.inputBox[i].y;
+                    fromXPos = x;
+                    fromYPos = y;
+                    inputBox = Game.inputBox[i];
+                    break;
                 }
             }
-            if (allFilled)
-            {
-                CheckAnswer();
-            }
+            CheckAnswer();
         }
         else
         {

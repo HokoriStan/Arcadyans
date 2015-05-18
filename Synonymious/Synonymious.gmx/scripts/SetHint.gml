@@ -49,7 +49,7 @@ if (Game.inputBox[showingHints].letter != letterToPress)
     }
 }
 Game.inputBox[showingHints].letterBox.locked = true;
-Game.inputBox[showingHints].letterBox.image_blend = 8454027;
+Game.inputBox[showingHints].letterBox.image_blend = c_green;
 //CheckAnswer(true);
 with (obj_inputBox)
 {
@@ -95,7 +95,7 @@ if (Game.inputBox[showingHints].letter != letterToPress)
     }
 }
 Game.inputBox[showingHints].letterBox.locked = true;
-Game.inputBox[showingHints].letterBox.image_blend = 8454027;
+Game.inputBox[showingHints].letterBox.image_blend = c_green;
 //CheckAnswer(true);
 with (obj_inputBox)
 {

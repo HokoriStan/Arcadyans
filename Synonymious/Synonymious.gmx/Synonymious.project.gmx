@@ -29,6 +29,7 @@
     <sprite>sprites\spr_full</sprite>
     <sprite>sprites\spr_buttonSmall</sprite>
     <sprite>sprites\spr_buttonLarge</sprite>
+    <sprite>sprites\spr_circle</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -38,6 +39,7 @@
     <script>scripts\LetterBoxClick.gml</script>
     <script>scripts\FindLetterBox.gml</script>
     <script>scripts\SetHint.gml</script>
+    <script>scripts\fade_out.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_boxText</font>
@@ -51,6 +53,7 @@
     <object>objects\obj_buttonShuffle</object>
     <object>objects\obj_buttonHint</object>
     <object>objects\obj_buttonRemoveLetter</object>
+    <object>objects\obj_circle</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_game</room>

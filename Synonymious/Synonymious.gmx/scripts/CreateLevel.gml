@@ -8,6 +8,8 @@ if (level >= ds_map_size(Game.synonymMap))
 Game.question = Game.keyArray[level];
 Game.answer = ds_map_find_value(Game.synonymMap,question);
 obj_buttonHint.showingHints = 0;
+Game.debug = false;
+Game.debugClick = 0;
 
 var letterList = ds_list_create();
 var answerLetterList = ds_list_create();

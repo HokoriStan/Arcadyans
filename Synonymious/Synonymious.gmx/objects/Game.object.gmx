@@ -25,7 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var file = file_text_open_read("Words with synonyms.txt");
+            <string>debug = false;
+debugClick = 0;
+
+
+var file = file_text_open_read("Words with synonyms.txt");
 application_surface_enable(false);
 device_mouse_dbclick_enable(false);
 
@@ -50,6 +54,12 @@ while (!file_text_eof(file))
     
     var value = string_copy(line,tabPos+1,string_length(line)-tabPos);
     value = string_upper(value);
+    if (string_length(value) &gt; 12)
+    {
+        show_debug_message(key+" - "+value+" has exeeded the max length of 12 characters: "+string(string_length(value)));
+    }
+    //key = "Test";
+    //value = "QWERTYUIOPAS";
     //show_debug_message(key+" = "+value);
     ds_map_add(synonymMap,key,value);
     ds_list_add(keyList,key);
@@ -155,6 +165,72 @@ CreateLevel(level);
         game_end();
     }
 }
+
+if (!debug)
+{
+    if (mouse_check_button_pressed(mb_left))
+    {
+        
+        switch (debugClick)
+        {
+            case 0: 
+            if (mouse_x &lt; room_width/2 &amp;&amp; mouse_y &lt; room_height/2)
+            {
+                debugClick++;
+            }
+            break;
+            
+            case 1:
+            if (mouse_x &gt; room_width/2 &amp;&amp; mouse_y &lt; room_height/2)
+            {
+                debugClick++;
+            }
+            else if (mouse_x &lt; room_width/2 &amp;&amp; mouse_y &lt; room_height/2)
+            {
+                debugClick = 1;
+            }
+            break;
+            
+            case 2:
+            if (mouse_x &gt; room_width/2 &amp;&amp; mouse_y &gt; room_height/2)
+            {
+                debugClick++;
+            }
+            else if (mouse_x &lt; room_width/2 &amp;&amp; mouse_y &lt; room_height/2)
+            {
+                debugClick = 1;
+            }
+            break;
+            
+            case 3:
+            if (mouse_x &lt; room_width/2 &amp;&amp; mouse_y &gt; room_height/2)
+            {
+                debugClick++;
+            }
+            else if (mouse_x &lt; room_width/2 &amp;&amp; mouse_y &lt; room_height/2)
+            {
+                debugClick = 1;
+            }
+            break;
+            
+            default:
+            if (mouse_x &lt; room_width/2 &amp;&amp; mouse_y &lt; room_height/2)
+            {
+                debugClick = 1;
+            }
+            else
+            {
+                debugClick = 0;
+            }
+            break;
+        }
+        if (debugClick == 4)
+        {
+            show_debug_message("Debug enabled!");
+            debug = true;
+        }
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -201,9 +277,11 @@ draw_set_alpha(1);
 draw_set_font(fnt_questionText);
 draw_text(room_width/2,room_height*0.3,question);
 
-draw_set_halign(fa_right);
-draw_text_transformed(room_width,room_height-20,answer,0.2,0.2,0);
-
+if (debug)
+{
+    draw_set_halign(fa_right);
+    draw_text_transformed(room_width,room_height-20,answer,0.2,0.2,0);
+}
 //4144959
 </string>
           </argument>

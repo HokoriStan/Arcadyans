@@ -85,9 +85,8 @@ dedicated	committed
 deduce	infer
 defective	faulty
 deliberate	planned
-deliberately	intentionally
 delicate	fragile
-demostrate	protest
+demonstrate	protest
 denationalize	privatize
 denims	jeans
 denote	indicate
@@ -154,7 +153,6 @@ gay	homosexual
 glitter	sparkle
 grab	seize
 grasping	greedy
-gratis	free of charge
 gratuity	tip
 gravestone	headstone
 grouse	grumble
@@ -240,11 +238,8 @@ livid	furious
 loopy	crazy
 lousy	awful
 lucid	clear
-
-mackintosh	waterproof coat
 madness	insanity
 magician	conjuror
-magistrate	Justice of the Peace
 magnify	exaggerate
 maintain	preserve
 man made	artificial
@@ -266,7 +261,6 @@ mind	intellect
 mindless	senseless
 minimize	play down
 mirror	reflect
-misconceive	misunderstand
 miserable	depressing
 misery	distress
 misread	misinterpret
@@ -288,7 +282,7 @@ a native	a local
 near	approach
 necessary	essential
 nightfall	dusk
-nobility	the Aristocracy
+nobility	Aristocracy
 nominate	appoint
 non-stop	continuous
 noon	midday
@@ -402,7 +396,6 @@ uncared for	neglected
 uncommon	unusual
 uncooked	raw
 undeniable	indisputable
-understandable	comprehensible
 unforeseen	unexpected
 unfortunate	unlucky
 unhurt	unharmed

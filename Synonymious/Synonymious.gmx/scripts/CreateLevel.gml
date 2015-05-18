@@ -70,14 +70,11 @@ for (var i=0;i<string_length(answer);i++)
     Game.inputBox[i] = instance_create(xPos,yPos,obj_inputBox);
     Game.inputBox[i].requiredLetter = ds_list_find_value(answerLetterList,i);
 }
-
 if (instance_number(obj_letterBox) <= string_length(Game.answer))
 {
     obj_buttonRemoveLetter.image_alpha = 0.7;
-    obj_buttonRemoveLetter.image_blend = c_gray;
 }
 else
 {
     obj_buttonRemoveLetter.image_alpha = 1;
-    obj_buttonRemoveLetter.image_blend = c_white;
 }

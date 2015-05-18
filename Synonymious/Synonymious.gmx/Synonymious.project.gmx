@@ -27,6 +27,7 @@
   <sprites name="sprites">
     <sprite>sprites\spr_empty</sprite>
     <sprite>sprites\spr_full</sprite>
+    <sprite>sprites\spr_squareButton</sprite>
     <sprite>sprites\spr_buttonSmall</sprite>
     <sprite>sprites\spr_buttonLarge</sprite>
     <sprite>sprites\spr_circle</sprite>
@@ -45,6 +46,7 @@
     <font>fonts\fnt_boxText</font>
     <font>fonts\fnt_questionText</font>
     <font>fonts\fnt_synonymFor</font>
+    <font>fonts\fnt_title</font>
   </fonts>
   <objects name="objects">
     <object>objects\Game</object>
@@ -55,8 +57,11 @@
     <object>objects\obj_buttonRemoveLetter</object>
     <object>objects\obj_circle</object>
     <object>objects\obj_levelCompletedMessage</object>
+    <object>objects\obj_buttonPlay</object>
+    <object>objects\obj_buttonQuit</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_menu</room>
     <room>rooms\rm_game</room>
   </rooms>
   <help>

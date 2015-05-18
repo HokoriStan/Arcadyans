@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>pressed = false;
+image_speed = 0;
 </string>
           </argument>
         </arguments>
@@ -48,9 +49,12 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_yscale = 1;
-image_blend = c_white;
-pressed = false;
+            <string>if (pressed)
+{
+    pressed = false;
+    image_index = 0;
+    y -= 9;
+}
 </string>
           </argument>
         </arguments>
@@ -125,9 +129,9 @@ pressed = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_yscale = -1;
-image_blend = c_gray;
-pressed = true;
+            <string>pressed = true;
+image_index = 1;
+y += 9;
 </string>
           </argument>
         </arguments>

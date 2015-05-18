@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -76,8 +76,6 @@ for (var i=0;i&lt;ds_list_size(keyList);i++)
 {
     keyArray[i] = ds_list_find_value(keyList,i);
 }
-
-CreateLevel(level);
 </string>
           </argument>
         </arguments>
@@ -99,7 +97,7 @@ CreateLevel(level);
           <argument>
             <kind>1</kind>
             <string>///Create Background Bubbles
-if room = rm_game
+//if room = rm_game
     {
     for (var i=0;i&lt;6;i++)
         {
@@ -164,10 +162,22 @@ CreateLevel(level);
             <kind>1</kind>
             <string>if (keyboard_check_pressed(vk_backspace) || keyboard_check_pressed(vk_escape))
 {
-    if (show_question("Are you sure you would like to quit?"))
+    switch (room)
     {
-        game_end();
+        case rm_game:
+            if (show_question("Are you sure you would like to go back to the main menu?"))
+            {
+                room_goto(rm_menu);
+            }
+        break;
+        case rm_menu:
+            if (show_question("Are you sure you would like to quit?"))
+            {
+                game_end();
+            }
+        break;
     }
+    
 }
 
 if (!debug)
@@ -240,6 +250,32 @@ if (!debug)
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (room == rm_game)
+{
+    CreateLevel(level);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -257,37 +293,52 @@ if (!debug)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_halign(fa_center);
-draw_set_valign(fa_middle);
-draw_set_color(c_white);
-
-draw_set_font(fnt_synonymFor);
-
-draw_set_color(c_black);
-draw_set_alpha(0.25);
-draw_text(room_width/2,room_height*0.1+5,"Synonym for:");
-
-draw_set_color(c_white);
-draw_set_alpha(1);
-draw_text(room_width/2,room_height*0.1,"Synonym for:");
-
-draw_set_color(c_black);
-draw_set_alpha(0.25);
-draw_set_font(fnt_questionText);
-draw_text(room_width/2,room_height*0.2+8,question);
-
-draw_set_color(c_white);
-draw_set_alpha(1);
-draw_set_font(fnt_questionText);
-draw_text(room_width/2,room_height*0.2,question);
-
-if (debug)
+            <string>if (room == rm_game)
 {
-    draw_set_halign(fa_right);
-    draw_text_transformed(room_width,room_height-20,answer,0.2,0.2,0);
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_middle);
+    draw_set_color(c_white);
+    
+    draw_set_font(fnt_synonymFor);
+    
+    draw_set_color(c_black);
+    draw_set_alpha(0.25);
+    draw_text(room_width/2,room_height*0.1+5,"Synonym for:");
+    
+    draw_set_color(c_white);
+    draw_set_alpha(1);
+    draw_text(room_width/2,room_height*0.1,"Synonym for:");
+    
+    draw_set_color(c_black);
+    draw_set_alpha(0.25);
+    draw_set_font(fnt_questionText);
+    draw_text(room_width/2,room_height*0.2+8,question);
+    
+    draw_set_color(c_white);
+    draw_set_alpha(1);
+    draw_set_font(fnt_questionText);
+    draw_text(room_width/2,room_height*0.2,question);
+    
+    if (debug)
+    {
+        draw_set_halign(fa_right);
+        draw_text_transformed(room_width,room_height-20,answer,0.2,0.2,0);
+    }
+    
+    //4144959
 }
-
-//4144959
+else if (room == rm_menu)
+{
+    draw_set_font(fnt_title);
+    
+    draw_set_color(c_black);
+    draw_set_alpha(0.25);
+    draw_text_transformed(room_width/2,room_height*0.15+8,"Synonymious",1,1,10);
+    
+    draw_set_color(c_white);
+    draw_set_alpha(1);
+    draw_text_transformed_colour(room_width/2,room_height*0.15,"Synonymious",1,1,10,c_white,15790320,c_white,15132390,1); 
+}
 </string>
           </argument>
         </arguments>

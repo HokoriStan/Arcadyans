@@ -26,13 +26,16 @@
           <argument>
             <kind>1</kind>
             <string>randomize();
-imagesize = random_range(0.1,1);
+
+changed = 0
+fadeout = false
+imagesize = random_range(0.1,0.75);
 alpha = random_range(0.25,0.5);
+
+image_alpha = 0
 image_xscale = imagesize
 image_yscale = imagesize
 alarm[0] = 1
-changed = 0
-
 </string>
           </argument>
         </arguments>
@@ -55,17 +58,17 @@ changed = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>move_towards_point(random_range(-512,1280),random_range(-512,1812),random_range(1,2))
+            <string>move_towards_point(random_range(-512,1280),random_range(-512,1812),random_range(1,2));
 changed += 1
 
 if changed = 10
     {
-    instance_create(random_range(-512,1280),random_range(-512,1812),obj_circle)
-    fade_out()
+    instance_create(random_range(-512,1280),random_range(-512,1812),obj_circle);
+    fadeout = true
     }
 else
     {
-    alarm[0] = random_range(300,450)
+    alarm[0] = random_range(300,450);
     }
 </string>
           </argument>
@@ -92,15 +95,20 @@ else
             <string>///fade_in()
 if changed &lt;= 1
 {
-if image_alpha &gt;= 0
-    {
-    image_alpha +=0.1
+    if image_alpha &lt;= alpha
+        {
+        image_alpha +=0.01
+        }
+    if image_alpha &gt;= alpha
+        {
+        image_alpha = alpha
+        }
     }
-if image_alpha &gt;= alpha
+
+if fadeout = true
     {
-    image_alpha = alpha
+    fade_out();
     }
-}
 </string>
           </argument>
         </arguments>
@@ -123,7 +131,8 @@ if image_alpha &gt;= alpha
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_destroy();
+            <string>instance_create(random_range(-512,1280),random_range(-512,1812),obj_circle);
+instance_destroy();
 </string>
           </argument>
         </arguments>

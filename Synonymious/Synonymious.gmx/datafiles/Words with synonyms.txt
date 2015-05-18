@@ -13,7 +13,7 @@ away	absent
 awful	terrible
 backbone	spine
 backside	behind
-bad(not good)	poor
+bad (not good)	poor
 beat	defeat
 begin	start
 behave	act
@@ -148,3 +148,287 @@ foyer	lobby
 fragrance	perfume
 French dressing	vinaigrette
 function	operate
+garbage	rubbish
+garbage can	trash can 
+gay	homosexual
+glitter	sparkle
+grab	seize
+grasping	greedy
+gratis	free of charge
+gratuity	tip
+gravestone	headstone
+grouse	grumble
+gut	intestine
+hall	corridor
+hand out	distribute
+handsome	good-looking
+hang-out	haunt
+happily	fortunately
+hard	tough
+hashish	cannabis
+hawk	peddle
+hazard	endanger
+hearsay	rumour
+hermetic	airtight
+highbrow	intellectual
+hint	tip
+hole	gap
+home	domestic
+homicide	murder
+housebreaking	burglary
+hunger	starvation
+hurry	rush
+hypothesis	speculation
+idler	loafer
+if	whether
+ignore	disregard
+illiberal	intolerant
+illuminate	clarify
+illustrate	demonstrate
+imagine	assume
+imitate	mimic
+immediate	instant
+immobile	motionless
+immoderate	excessive
+immodest	conceited
+impact	affect
+impartial	neutral
+impasse	deadlock
+impassive	emotionless
+impeach	question
+impediment	obstacle
+imperative	vital
+impolite	rude
+inconsiderate	thoughtless
+indisputable	undeniable
+infamous	notorious
+infantile	childish
+infect	contaminate
+inflexible	rigid
+inflow	influx
+informal	casual
+infrequent	rare
+inheritor	heir
+innocent	harmless
+insolvent	bankrupt
+inspect	examine
+instinct	intuition
+instructions	directions
+insufferable	unbearable
+insufficient	inadequate
+insupportable	intolerable
+insurgent	rebel
+intellectual	mental
+intend	mean
+intensify	heighten
+interplay	interaction
+inventory	stock
+invoice	bill
+involve	entail
+isolated	lonely
+jealous	envious
+joy	delight
+knowingly	deliberately
+lacking	missing
+last	final
+leading	main
+learn	memorize
+legitimate	valid
+lethal	deadly
+liveable	habitable
+livid	furious
+loopy	crazy
+lousy	awful
+lucid	clear
+
+mackintosh	waterproof coat
+madness	insanity
+magician	conjuror
+magistrate	Justice of the Peace
+magnify	exaggerate
+maintain	preserve
+man made	artificial
+mannequin	model
+material	fabric
+matters	things
+maybe	perhaps
+in the meantime	meanwhile
+measure	degree
+meeting	assembly
+mendacity	lying
+merciless	cruel
+middleman	intermediary
+midway	halfway
+migrate	emigrate
+mild	gentle
+mimic	imitate
+mind	intellect
+mindless	senseless
+minimize	play down
+mirror	reflect
+misconceive	misunderstand
+miserable	depressing
+misery	distress
+misread	misinterpret
+missing	lost
+mistrust	distrust
+mo 	moment
+moderately	reasonably
+modern	contemporary
+more and more	increasingly
+moreover	in addition
+movie	film
+murderer	assassin
+naked	bare
+nameless	anonymous
+napkin	serviette
+narrate	relate
+a narrative	a story
+a native	a local
+near	approach
+necessary	essential
+nightfall	dusk
+nobility	the Aristocracy
+nominate	appoint
+non-stop	continuous
+noon	midday
+noted	famous
+notify	inform
+notwithstanding	however
+nugatory	worthless
+numerous	many
+obdurate	stubborn
+object	thing
+obligatory	compulsory
+oblique	indirect
+omnipotent	all-powerful
+obsolete	out of date
+off-season	low season
+operate	function
+organic	biological
+ornament	decoration
+outside	external
+overhaul	overtake
+overlook	miss
+overseas	abroad
+oversee	supervise
+painting	portray
+paper money	notes
+particular	specific
+passable	satisfactory
+pattern	sample
+peaceable	peaceful
+perception	insight
+phantasm	illusion
+pocket book	notebook
+poisonous	toxic
+possibility	opportunity
+post-mortem	autopsy
+practically	virtually
+praise	compliment
+precedence	priority
+precept	principle
+precis	summary
+pressing	urgent
+previous	preceding
+priority	precedence
+prompt	immediate
+prosperous	affluent
+provide	supply
+provided	if
+put back	postpone
+quake	tremble
+quite	fairly
+reasonable	fair
+receive	get
+refrain	chorus
+reliable	dependable
+religious	devout
+remainder	the rest
+remark	comment
+reminiscence	memory
+remorse	regret
+removable	detachable
+renew	resume
+renounce	give up
+repute	reputation
+respond	reply
+revolting	disgusting
+rubbish	nonsense
+rude	impolite
+rue	regret
+sacristy	vestry
+satisfied	convinced
+scarcity	shortage
+scrumptious	delicious
+second	moment
+select	choose
+selection	choice
+self-assured	confident
+signal	sign
+significant	meaningful
+silly	foolish
+sincere	honest
+skull	cranium
+soiled	dirty
+spotlight	highlight
+stable	steady
+steady	regular
+stupid	silly
+substantially	considerably
+suggest	propose
+sundown	sunset
+sunrise	dawn
+sure	certain
+surroundings	environment
+survive	outlive
+symbolize	represent
+tailored	tailor-made
+temper	mood
+terror	terrorism
+testament	testimony
+today	nowadays
+torpid	lethargic
+touchdown	landing
+touchy	sensitive
+transform	convert
+transitory	temporary
+transparent	obvious
+trustworthy	reliable
+twister	tornado
+twosome	pair
+ultimate	final
+uncared for	neglected
+uncommon	unusual
+uncooked	raw
+undeniable	indisputable
+understandable	comprehensible
+unforeseen	unexpected
+unfortunate	unlucky
+unhurt	unharmed
+uninjured	unhurt
+unlawful	illegal
+unmarried	single
+unstated	unspoken
+untimely	premature
+untrue	unfaithful
+unusual	strange
+unvoiced	voiceless
+uprising	rebellion
+usually	normally
+vacancy	emptiness
+vacuum	hoover
+vague	indistinct
+vain	useless
+valueless	worthless
+vanquish	conquer
+vary	differ
+vast	huge
+virtue	advantage
+visualize	imagine
+warranty	guarantee
+well mannered	polite
+well timed	timely
+winery	vineyard
+withstand	resist
+zenith	peak

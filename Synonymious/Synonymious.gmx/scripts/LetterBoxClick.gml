@@ -39,9 +39,12 @@ with (argument[0])
                 {
                     with (obj_inputBox)
                     {
-                        if (!letterBox.locked)
+                        if (letterBox != -1)
                         {
-                            letterBox.image_blend = c_white;
+                            if (!letterBox.locked)
+                            {
+                                letterBox.image_blend = c_white;
+                            }
                         }
                     }
                 }

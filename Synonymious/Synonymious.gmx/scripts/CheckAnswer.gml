@@ -22,7 +22,7 @@ if (levelSolved)
     Game.alarm[0] = room_speed;
     with (obj_inputBox)
     {
-        letterBox.image_blend = c_green;
+        letterBox.image_blend = 8454027;
     }
 }
 else if (!ignoreLevelNotSolved)

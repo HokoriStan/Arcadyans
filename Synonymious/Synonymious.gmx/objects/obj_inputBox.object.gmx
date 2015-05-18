@@ -53,7 +53,7 @@ letterBox = -1;
             <kind>1</kind>
             <string>if (!letterBox.locked)
 {
-    letterBox.image_blend = c_red;
+    letterBox.image_blend = 8421631;
 }
 letterBox.startShake = startShake;
 </string>

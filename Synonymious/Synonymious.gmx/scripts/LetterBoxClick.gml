@@ -41,7 +41,7 @@ with (argument[0])
         }
         else
         {
-            if (image_blend == c_red || image_blend == c_green)
+            if (image_blend == 8421631 || image_blend == 8454027)
             {
                 if (!dontChangeColor)
                 {

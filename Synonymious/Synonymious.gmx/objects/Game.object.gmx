@@ -28,13 +28,17 @@
             <string>debug = false;
 debugClick = 0;
 
+levelSolvedPosition = 0;
+levelSolvedText = "Well done!";
+
+level = 0;
+levelSolved = false;
 
 var file = file_text_open_read("Words with synonyms.txt");
 application_surface_enable(false);
 device_mouse_dbclick_enable(false);
 
-level = 0;
-levelSolved = false;
+
 synonymMap = ds_map_create();
 var keyList = ds_list_create();
 var i = 0;
@@ -261,27 +265,28 @@ draw_set_font(fnt_synonymFor);
 
 draw_set_color(c_black);
 draw_set_alpha(0.25);
-draw_text(room_width/2,room_height*0.2+5,"Synonym for:");
+draw_text(room_width/2,room_height*0.1+5,"Synonym for:");
 
 draw_set_color(c_white);
 draw_set_alpha(1);
-draw_text(room_width/2,room_height*0.2,"Synonym for:");
+draw_text(room_width/2,room_height*0.1,"Synonym for:");
 
 draw_set_color(c_black);
 draw_set_alpha(0.25);
 draw_set_font(fnt_questionText);
-draw_text(room_width/2,room_height*0.3+8,question);
+draw_text(room_width/2,room_height*0.2+8,question);
 
 draw_set_color(c_white);
 draw_set_alpha(1);
 draw_set_font(fnt_questionText);
-draw_text(room_width/2,room_height*0.3,question);
+draw_text(room_width/2,room_height*0.2,question);
 
 if (debug)
 {
     draw_set_halign(fa_right);
     draw_text_transformed(room_width,room_height-20,answer,0.2,0.2,0);
 }
+
 //4144959
 </string>
           </argument>

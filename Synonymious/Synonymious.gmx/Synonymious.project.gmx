@@ -54,6 +54,7 @@
     <object>objects\obj_buttonHint</object>
     <object>objects\obj_buttonRemoveLetter</object>
     <object>objects\obj_circle</object>
+    <object>objects\obj_levelCompletedMessage</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_game</room>

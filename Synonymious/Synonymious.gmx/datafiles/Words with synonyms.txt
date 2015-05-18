@@ -1,11 +1,11 @@
-approximately	about
+approximately	almost
 accomplish	achieve
 admit	confess
 almost	nearly
 annoy	irritate
 answer	reply
-appear	seem
-arrive	reach
+appear	arrive
+arrive	land
 association	organization
 assure	guarantee
 attractive	appealing
@@ -27,6 +27,7 @@ branch	department
 brave	courageous
 brow	forehead
 bum	backside
+butt    bottom
 business	commerce
 candy	sweet
 categorize	classify

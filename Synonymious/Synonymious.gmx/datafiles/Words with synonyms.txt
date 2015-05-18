@@ -5,7 +5,7 @@ almost	nearly
 annoy	irritate
 answer	reply
 appear	arrive
-arrive	land
+arrive	reach
 association	organization
 assure	guarantee
 attractive	appealing

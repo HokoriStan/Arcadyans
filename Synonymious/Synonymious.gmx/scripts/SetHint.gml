@@ -1,40 +1,40 @@
 var list = ds_list_create();
 for (var i=0;i<array_length_1d(Game.inputBox);i++)
 {
-    if (!Game.inputBox[i].locked)
+    if (Game.inputBox[i].letterBox == -1 || !Game.inputBox[i].letterBox.locked)
     {
         ds_list_add(list,i);
     }
 }
 ds_list_shuffle(list);
 
-var targetInputBox = Game.inputBox[random(ds_list_size(list))];
+var targetInputBox = Game.inputBox[ds_list_find_value(list,irandom(ds_list_size(list)-1))];
 var letterToPress = targetInputBox.requiredLetter;
 
-var letterToPress = string_char_at(Game.answer,showingHints+1);
-if (Game.inputBox[showingHints].letter != letterToPress)
+//var letterToPress = string_char_at(Game.answer,showingHints+1);
+if (targetInputBox.letter != letterToPress)
 {
-    if (Game.inputBox[showingHints].letter != "")
+    if (targetInputBox.letter != "")
     {
-        LetterBoxClick(Game.inputBox[showingHints].letterBox,true);
+        LetterBoxClick(targetInputBox.letterBox,true);
     }
     var letterBox = FindLetterBox(letterToPress);
     if (letterBox.x == letterBox.originalXPos && letterBox.y == letterBox.originalYPos)
     {
-        LetterBoxClick(letterBox);
+        LetterBoxClick(letterBox, false, targetInputBox);
     }
     else
     {
         letterBox.inputBox.letter = "";
         letterBox.inputBox.letterBox = -1;
         
-        Game.inputBox[showingHints].letter = letterToPress;
-        Game.inputBox[showingHints].letterBox = letterBox;
-        letterBox.toXPos = Game.inputBox[showingHints].x;
-        letterBox.toYPos = Game.inputBox[showingHints].y;
+        targetInputBox.letter = letterToPress;
+        targetInputBox.letterBox = letterBox;
+        letterBox.toXPos = targetInputBox.x;
+        letterBox.toYPos = targetInputBox.y;
         letterBox.fromXPos = letterBox.x;
         letterBox.fromYPos = letterBox.y;
-        letterBox.inputBox = Game.inputBox[showingHints];
+        letterBox.inputBox = targetInputBox;
         letterSet = true;
         with (obj_inputBox)
         {
@@ -48,8 +48,8 @@ if (Game.inputBox[showingHints].letter != letterToPress)
         }
     }
 }
-Game.inputBox[showingHints].letterBox.locked = true;
-Game.inputBox[showingHints].letterBox.image_blend = 8454027;
+targetInputBox.letterBox.locked = true;
+targetInputBox.letterBox.image_blend = 8454027;
 //CheckAnswer(true);
 with (obj_inputBox)
 {
@@ -58,11 +58,11 @@ with (obj_inputBox)
 showingHints++;
 
 /*var letterToPress = string_char_at(Game.answer,showingHints+1);
-if (Game.inputBox[showingHints].letter != letterToPress)
+if (targetInputBox.letter != letterToPress)
 {
-    if (Game.inputBox[showingHints].letter != "")
+    if (targetInputBox.letter != "")
     {
-        LetterBoxClick(Game.inputBox[showingHints].letterBox,true);
+        LetterBoxClick(targetInputBox.letterBox,true);
     }
     var letterBox = FindLetterBox(letterToPress);
     if (letterBox.x == letterBox.originalXPos && letterBox.y == letterBox.originalYPos)
@@ -74,13 +74,13 @@ if (Game.inputBox[showingHints].letter != letterToPress)
         letterBox.inputBox.letter = "";
         letterBox.inputBox.letterBox = -1;
         
-        Game.inputBox[showingHints].letter = letterToPress;
-        Game.inputBox[showingHints].letterBox = letterBox;
-        letterBox.toXPos = Game.inputBox[showingHints].x;
-        letterBox.toYPos = Game.inputBox[showingHints].y;
+        targetInputBox.letter = letterToPress;
+        targetInputBox.letterBox = letterBox;
+        letterBox.toXPos = targetInputBox.x;
+        letterBox.toYPos = targetInputBox.y;
         letterBox.fromXPos = letterBox.x;
         letterBox.fromYPos = letterBox.y;
-        letterBox.inputBox = Game.inputBox[showingHints];
+        letterBox.inputBox = targetInputBox;
         letterSet = true;
         with (obj_inputBox)
         {
@@ -94,8 +94,8 @@ if (Game.inputBox[showingHints].letter != letterToPress)
         }
     }
 }
-Game.inputBox[showingHints].letterBox.locked = true;
-Game.inputBox[showingHints].letterBox.image_blend = 8454027;
+targetInputBox.letterBox.locked = true;
+targetInputBox.letterBox.image_blend = 8454027;
 //CheckAnswer(true);
 with (obj_inputBox)
 {

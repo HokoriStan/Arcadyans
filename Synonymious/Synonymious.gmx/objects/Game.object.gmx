@@ -32,6 +32,7 @@ device_mouse_dbclick_enable(false);
 level = 0;
 levelSolved = false;
 synonymMap = ds_map_create();
+var keyList = ds_list_create();
 var i = 0;
 while (!file_text_eof(file))
 {
@@ -51,9 +52,15 @@ while (!file_text_eof(file))
     value = string_upper(value);
     //show_debug_message(key+" = "+value);
     ds_map_add(synonymMap,key,value);
-    keyArray[i] = key;
+    ds_list_add(keyList,key);
     i++;
     file_text_readln(file);
+}
+
+ds_list_shuffle(keyList);
+for (var i=0;i&lt;ds_list_size(keyList);i++)
+{
+    keyArray[i] = ds_list_find_value(keyList,i);
 }
 
 CreateLevel(level);

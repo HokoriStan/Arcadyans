@@ -62,9 +62,6 @@ while (!file_text_eof(file))
     {
         show_debug_message(key+" - "+value+" has exeeded the max length of 12 characters: "+string(string_length(value)));
     }
-    //key = "Test";
-    //value = "QWERTYUIOPAS";
-    //show_debug_message(key+" = "+value);
     ds_map_add(synonymMap,key,value);
     ds_list_add(keyList,key);
     i++;
@@ -76,6 +73,7 @@ for (var i=0;i&lt;ds_list_size(keyList);i++)
 {
     keyArray[i] = ds_list_find_value(keyList,i);
 }
+ds_list_destroy(keyList);
 </string>
           </argument>
         </arguments>

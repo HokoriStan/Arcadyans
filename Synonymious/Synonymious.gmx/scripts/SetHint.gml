@@ -11,7 +11,6 @@ ds_list_shuffle(list);
 var targetInputBox = Game.inputBox[ds_list_find_value(list,irandom(ds_list_size(list)-1))];
 var letterToPress = targetInputBox.requiredLetter;
 
-//var letterToPress = string_char_at(Game.answer,showingHints+1);
 if (targetInputBox.letter != letterToPress)
 {
     if (targetInputBox.letter != "")
@@ -50,55 +49,9 @@ if (targetInputBox.letter != letterToPress)
 }
 targetInputBox.letterBox.locked = true;
 targetInputBox.letterBox.image_blend = 8454027;
-//CheckAnswer(true);
 with (obj_inputBox)
 {
     startShake = false;
 }
-showingHints++;
+ds_list_destroy(list);
 
-/*var letterToPress = string_char_at(Game.answer,showingHints+1);
-if (targetInputBox.letter != letterToPress)
-{
-    if (targetInputBox.letter != "")
-    {
-        LetterBoxClick(targetInputBox.letterBox,true);
-    }
-    var letterBox = FindLetterBox(letterToPress);
-    if (letterBox.x == letterBox.originalXPos && letterBox.y == letterBox.originalYPos)
-    {
-        LetterBoxClick(letterBox);
-    }
-    else
-    {
-        letterBox.inputBox.letter = "";
-        letterBox.inputBox.letterBox = -1;
-        
-        targetInputBox.letter = letterToPress;
-        targetInputBox.letterBox = letterBox;
-        letterBox.toXPos = targetInputBox.x;
-        letterBox.toYPos = targetInputBox.y;
-        letterBox.fromXPos = letterBox.x;
-        letterBox.fromYPos = letterBox.y;
-        letterBox.inputBox = targetInputBox;
-        letterSet = true;
-        with (obj_inputBox)
-        {
-            if (id.letterBox != -1)
-            {
-                if (!id.letterBox.locked)
-                {
-                    id.letterBox.image_blend = c_white;
-                }
-            }
-        }
-    }
-}
-targetInputBox.letterBox.locked = true;
-targetInputBox.letterBox.image_blend = 8454027;
-//CheckAnswer(true);
-with (obj_inputBox)
-{
-    startShake = false;
-}
-showingHints++;

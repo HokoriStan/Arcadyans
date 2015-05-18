@@ -27,7 +27,6 @@
             <kind>1</kind>
             <string>pressed = false;
 image_speed = 0;
-showingHints = 0;
 </string>
           </argument>
         </arguments>

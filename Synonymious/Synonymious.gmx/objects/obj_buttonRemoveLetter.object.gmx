@@ -92,6 +92,7 @@ showingHints = 0;
     }
     
     var char = ds_list_find_value(list,irandom(ds_list_size(list)-1));
+    ds_list_destroy(list);
     if (is_undefined(char))
     {
         exit;

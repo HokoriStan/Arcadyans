@@ -78,3 +78,7 @@ else
 {
     obj_buttonRemoveLetter.image_alpha = 1;
 }
+
+ds_list_destroy(letterList);
+ds_list_destroy(answerLetterList);
+ds_list_destroy(answerLetterListCopy);

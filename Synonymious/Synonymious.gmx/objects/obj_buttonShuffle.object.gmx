@@ -106,6 +106,7 @@ image_speed = 0;
             instance.toYPos = instance.originalYPos;
         }
     }
+    ds_list_destroy(list);
 }
 </string>
           </argument>

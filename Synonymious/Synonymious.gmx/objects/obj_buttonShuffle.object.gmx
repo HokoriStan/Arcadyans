@@ -154,7 +154,7 @@ pressed = true;
 draw_set_halign(fa_middle);
 draw_set_valign(fa_center);
 draw_set_font(fnt_boxText);
-draw_set_colour(c_black);
+draw_set_colour(4144959);
 draw_text(x,y,"Shuffle");
 </string>
           </argument>

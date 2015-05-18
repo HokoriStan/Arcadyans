@@ -164,7 +164,7 @@ if (instance_number(obj_letterBox) &gt; string_length(Game.answer))
 draw_set_font(fnt_boxText);
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
-draw_set_color(c_black);
+draw_set_color(4144959);
 draw_set_alpha(image_alpha);
 draw_text(x,y,"Remove letter");
 draw_set_alpha(1);

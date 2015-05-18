@@ -136,7 +136,7 @@ image_blend = c_gray;
 draw_set_font(fnt_boxText);
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
-draw_set_color(c_black);
+draw_set_color(4144959);
 draw_text(x,y,"Hint");
 </string>
           </argument>

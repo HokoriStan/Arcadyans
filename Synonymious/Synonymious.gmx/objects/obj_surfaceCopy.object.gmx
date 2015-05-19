@@ -78,7 +78,10 @@ initialized = false;
     surface_set_target(surface);
     with (all)
     {
-        event_perform(ev_draw,0);
+        if (id != other.id)
+        {
+            event_perform(ev_draw,0);
+        }
     }
     surface_reset_target();
 

@@ -25,9 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>randomize();
-
-changed = 0
+            <string>changed = 0
 fadeout = false
 imagesize = random_range(0.1,0.75);
 alpha = random_range(0.25,0.5);

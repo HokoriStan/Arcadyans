@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x = 0;
+            <string>random_set_seed(0);
+
+x = 0;
 y = 0;
 
 debug = false;
@@ -78,7 +80,7 @@ while (!file_text_eof(file))
     file_text_readln(file);
 }
 
-//ds_list_shuffle(keyList);
+ds_list_shuffle(keyList);
 for (var i=0;i&lt;ds_list_size(keyList);i++)
 {
     keyArray[i] = ds_list_find_value(keyList,i);

@@ -20,7 +20,11 @@ if (levelSolved)
 {
     Game.levelSolved = true;
     SaveLevel(Game.level);
-    instance_create(x,y,obj_levelCompletedMessage);
+    if (!instance_exists(obj_levelSolvedText))
+    {
+        instance_create(x,y,obj_levelSolvedText);
+        obj_levelSolvedText.nextLevel = true;
+    }
     //Game.alarm[0] = room_speed;
     with (obj_inputBox)
     {

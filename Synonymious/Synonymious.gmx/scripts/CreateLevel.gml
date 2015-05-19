@@ -5,8 +5,14 @@ if (level >= ds_map_size(Game.synonymMap))
     level = 0;
 }
 
+with (obj_levelSolvedText)
+{
+    instance_destroy();
+}
+
+
 Game.question = Game.keyArray[level];
-Game.answer = ds_map_find_value(Game.synonymMap,question);
+Game.answer = ds_map_find_value(Game.synonymMap,Game.question);
 Game.levelSolved = false;
 obj_buttonHint.showingHints = 0;
 Game.debug = false;
@@ -71,9 +77,9 @@ var spacing = 5;
 var xOffset = sprite_get_width(spr_empty)+spacing;
 var yOffset = sprite_get_height(spr_empty)+spacing;
 
-var leftXPos = centerXPos - (string_length(answer)/2 * xOffset) + xOffset/2;
+var leftXPos = centerXPos - (string_length(Game.answer)/2 * xOffset) + xOffset/2;
 Game.inputBox = -1;
-for (var i=0;i<string_length(answer);i++)
+for (var i=0;i<string_length(Game.answer);i++)
 {
     var xPos = leftXPos + i * xOffset;
     var yPos = centerYPos;
@@ -93,11 +99,16 @@ else
 if (Game.levelSolved)
 {
     Game.levelSolved = false;
+    instance_create(x,y,obj_levelSolvedText);
+    obj_levelSolvedText.size = obj_levelSolvedText.targetSize;
+    obj_levelSolvedText.alpha = obj_levelSolvedText.targetAlpha;
+    obj_levelSolvedText.shadowSize = obj_levelSolvedText.targetShadowSize;
+    obj_levelSolvedText.shadowAlpha = obj_levelSolvedText.targetShadowAlpha;
+    
     for (var i=0;i<array_length_1d(Game.inputBox);i++)
     {
         SetHint(i);
     }
-    
 }
 else
 {

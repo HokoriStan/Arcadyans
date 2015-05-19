@@ -27,7 +27,7 @@ branch	department
 brave	courageous
 brow	forehead
 bum	backside
-butt    bottom
+butt	bottom
 business	commerce
 candy	sweet
 categorize	classify

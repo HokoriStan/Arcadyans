@@ -45,7 +45,7 @@ if (targetInputBox.letter != letterToPress)
         letterBox.fromXPos = letterBox.x;
         letterBox.fromYPos = letterBox.y;
         letterBox.inputBox = targetInputBox;
-        letterBox.moveSpeed = 40;
+        letterBox.moveSpeed = 25;
         letterSet = true;
         with (obj_inputBox)
         {
@@ -61,15 +61,16 @@ if (targetInputBox.letter != letterToPress)
 }
 targetInputBox.letterBox.locked = true;
 targetInputBox.letterBox.image_blend = 8454027;
+if (argument_count > 0)
+{
+    if (instance_exists(obj_levelSolvedText))
+    {
+        obj_levelSolvedText.nextLevel = false;
+        show_debug_message("TRUE");
+    }
+}
 with (obj_inputBox)
 {
     startShake = false;
-}
-if (argument_count != 0)
-{
-    with (obj_levelCompletedMessage)
-    {
-        instance_destroy();
-    }
 }
 ds_list_destroy(list);

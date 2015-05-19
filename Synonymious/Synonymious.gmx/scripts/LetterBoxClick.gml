@@ -28,7 +28,7 @@ with (argument[0])
                     inputBox = Game.inputBox[i];
                     if (argument_count > 1)
                     {
-                        moveSpeed = 40;
+                        moveSpeed = 25;
                     }
                     break;
                 }
@@ -67,7 +67,7 @@ with (argument[0])
             shakeCount = 0;
             if (argument_count > 1)
             {
-                moveSpeed = 40;
+                moveSpeed = 25;
             }
         }
     }

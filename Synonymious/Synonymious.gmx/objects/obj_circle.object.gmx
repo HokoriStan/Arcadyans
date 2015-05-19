@@ -3,7 +3,7 @@
   <spriteName>spr_circle</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>1</depth>
+  <depth>5</depth>
   <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -36,6 +36,8 @@ image_alpha = 0
 image_xscale = imagesize
 image_yscale = imagesize
 alarm[0] = 1
+
+clone = false;
 </string>
           </argument>
         </arguments>
@@ -113,6 +115,44 @@ if fadeout = true
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>var xBorder = 0;
+var yBorder = 0;
+var width = room_width;
+var height = room_height;
+
+if (instance_exists(obj_surfaceCopy))
+{
+    xBorder = -room_width;
+}
+
+if (x &lt; xBorder || y &lt; yBorder || x &gt; width || y &gt; height)
+{
+    if (!clone)
+    {
+        instance_create(random_range(-512,1280),random_range(-512,1812),obj_circle);
+    }
+    instance_destroy();
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="7" enumb="0">
       <action>
@@ -131,8 +171,8 @@ if fadeout = true
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_create(random_range(-512,1280),random_range(-512,1812),obj_circle);
-instance_destroy();
+            <string>//instance_create(random_range(-512,1280),random_range(-512,1812),obj_circle);
+//instance_destroy();
 </string>
           </argument>
         </arguments>

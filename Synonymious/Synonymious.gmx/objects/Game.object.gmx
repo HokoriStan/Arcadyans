@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>3</depth>
   <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,7 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>debug = false;
+            <string>x = 0;
+y = 0;
+
+debug = false;
 debugClick = 0;
 
 levelSolvedPosition = 0;
@@ -113,8 +116,6 @@ ds_list_destroy(keyList);
           </argument>
         </arguments>
       </action>
-    </event>
-    <event eventtype="2" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -131,17 +132,10 @@ ds_list_destroy(keyList);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>level ++;
-levelSolved = false;
-with (obj_inputBox)
-{
-    instance_destroy();
-}
-with (obj_letterBox)
-{
-    instance_destroy();
-}
-CreateLevel(level);
+            <string>///swipe code
+
+tapPos = 0;
+drag = false;
 
 </string>
           </argument>
@@ -165,7 +159,15 @@ CreateLevel(level);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (keyboard_check_pressed(vk_backspace) || keyboard_check_pressed(vk_escape))
+            <string>if (keyboard_check_pressed(vk_space))
+{
+    with (instance_create(0,0,obj_surfaceCopy))
+    {
+        dir = 1;
+        event_perform(ev_step,0);
+    }
+}
+if (keyboard_check_pressed(vk_backspace) || keyboard_check_pressed(vk_escape))
 {
     switch (room)
     {
@@ -256,6 +258,105 @@ if (!debug)
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Check for page/level swipe
+
+if (mouse_check_button_pressed(mb_left))
+{
+    tapPos = mouse_x;
+    drag = true;
+}
+if (mouse_check_button_released(mb_left))
+{
+    tapPos = mouse_x;
+    drag = false;
+}
+if (!instance_exists(obj_surfaceCopy) &amp;&amp; drag)
+{
+    if (mouse_x-tapPos &gt; 100)
+    {
+        if (room == rm_game &amp;&amp; Game.level &gt; 0)
+        {
+            Game.level --;
+            Game.levelSolved = false;
+            with (obj_inputBox)
+            {
+                instance_destroy();
+            }
+            with (obj_letterBox)
+            {
+                instance_destroy();
+            }
+            CreateLevel(Game.level);
+        }
+        else if (room == rm_levelSelect &amp;&amp; instance_exists(obj_buttonPreviousPage))
+        {
+            Game.levelSelectionPage --;
+            CreateLevelButtons(Game.levelSelectionPage);
+        }
+        else
+        {
+            exit;
+        }
+        with (instance_create(0,0,obj_surfaceCopy))
+        {
+            dir = -1;
+            event_perform(ev_step,0);
+        }
+        drag = false;
+    }
+    else if (mouse_x-tapPos &lt; -100 &amp;&amp; drag)
+    {
+        if (room == rm_game)
+        {
+            Game.level ++;
+            Game.levelSolved = false;
+            with (obj_inputBox)
+            {
+                instance_destroy();
+            }
+            with (obj_letterBox)
+            {
+                instance_destroy();
+            }
+            CreateLevel(Game.level);
+        }
+        else if (room == rm_levelSelect &amp;&amp; instance_exists(obj_buttonNextPage))
+        {
+            Game.levelSelectionPage ++;
+            CreateLevelButtons(Game.levelSelectionPage);
+        }
+        else
+        {
+            exit;
+        }
+        with (instance_create(0,0,obj_surfaceCopy))
+        {
+            dir = 1;
+            event_perform(ev_step,0);
+        }
+        drag = false;
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="7" enumb="4">
       <action>
@@ -313,15 +414,7 @@ if (room == rm_levelSelect)
     
     draw_set_color(c_white);
     draw_set_alpha(1);
-    draw_text(20,50,"Level "+string(Game.level));
-    
-    if (Game.levelSolved)
-    {
-        draw_set_color(c_green);
-        draw_set_alpha(0.6);
-        var xPos = 20 + string_width("Level "+string(Game.level))/2 - string_width("Solved!")/2;
-        draw_text_transformed(xPos,50,"Solved!",0.8,0.8,5);
-    }
+    draw_text(x+20,y+50,"Level "+string(Game.level+1));
     
     draw_set_halign(fa_center);
     
@@ -329,26 +422,26 @@ if (room == rm_levelSelect)
     
     draw_set_color(c_black);
     draw_set_alpha(0.25);
-    draw_text(room_width/2,room_height*0.1+5,"Synonym for:");
+    draw_text(x+room_width/2,y+room_height*0.15+5,"Synonym for:");
     
     draw_set_color(c_white);
     draw_set_alpha(1);
-    draw_text(room_width/2,room_height*0.1,"Synonym for:");
+    draw_text(x+room_width/2,y+room_height*0.15,"Synonym for:");
     
     draw_set_font(fnt_questionText);
     
     draw_set_color(c_black);
     draw_set_alpha(0.25);
-    draw_text(room_width/2,room_height*0.2+8,question);
+    draw_text(x+room_width/2,y+room_height*0.25+8,question);
     
     draw_set_color(c_white);
     draw_set_alpha(1);
-    draw_text(room_width/2,room_height*0.2,question);
+    draw_text(x+room_width/2,y+room_height*0.25,question);
     
     if (debug)
     {
         draw_set_halign(fa_right);
-        draw_text_transformed(room_width,room_height-20,answer,0.2,0.2,0);
+        draw_text_transformed(x+room_width,y+room_height-20,answer,0.2,0.2,0);
     }
     
     //4144959

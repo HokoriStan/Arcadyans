@@ -26,6 +26,10 @@ for (var i=0;i<pageLevels;i++)
     {
         var instance = instance_create(leftXPos+xIndex*xOffset,topYPos+yIndex*yOffset,obj_buttonLevel);
         instance.level = level;
+        if (string_char_at(ds_map_find_value(Game.dataMap,"Level "+string(level)),1) == "1")
+        {
+            instance.image_blend = 8454027;
+        }
     }
     else
     {

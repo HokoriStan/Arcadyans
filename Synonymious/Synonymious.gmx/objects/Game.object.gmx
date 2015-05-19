@@ -35,6 +35,11 @@ level = 0;
 levelSolved = false;
 levelSelectionPage = 0;
 
+hintAmount = 5;
+removeLetterAmount = 5;
+
+dataMap = LoadDataMap();
+hintIndexes = ds_list_create();
 
 var file = file_text_open_read("Words with synonyms.txt");
 application_surface_enable(false);
@@ -301,9 +306,24 @@ if (room == rm_levelSelect)
             <kind>1</kind>
             <string>if (room == rm_game)
 {
-    draw_set_halign(fa_center);
+    draw_set_halign(fa_left);
     draw_set_valign(fa_middle);
+    
+    draw_set_font(fnt_boxText);
+    
     draw_set_color(c_white);
+    draw_set_alpha(1);
+    draw_text(20,50,"Level "+string(Game.level));
+    
+    if (Game.levelSolved)
+    {
+        draw_set_color(c_green);
+        draw_set_alpha(0.6);
+        var xPos = 20 + string_width("Level "+string(Game.level))/2 - string_width("Solved!")/2;
+        draw_text_transformed(xPos,50,"Solved!",0.8,0.8,5);
+    }
+    
+    draw_set_halign(fa_center);
     
     draw_set_font(fnt_synonymFor);
     
@@ -315,14 +335,14 @@ if (room == rm_levelSelect)
     draw_set_alpha(1);
     draw_text(room_width/2,room_height*0.1,"Synonym for:");
     
+    draw_set_font(fnt_questionText);
+    
     draw_set_color(c_black);
     draw_set_alpha(0.25);
-    draw_set_font(fnt_questionText);
     draw_text(room_width/2,room_height*0.2+8,question);
     
     draw_set_color(c_white);
     draw_set_alpha(1);
-    draw_set_font(fnt_questionText);
     draw_text(room_width/2,room_height*0.2,question);
     
     if (debug)

@@ -19,6 +19,7 @@ for (var i=0;i<instance_number(obj_inputBox);i++)
 if (levelSolved)
 {
     Game.levelSolved = true;
+    SaveLevel(Game.level);
     instance_create(x,y,obj_levelCompletedMessage);
     //Game.alarm[0] = room_speed;
     with (obj_inputBox)

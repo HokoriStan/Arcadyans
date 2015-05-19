@@ -77,7 +77,7 @@ image_speed = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (pressed)
+            <string>if (pressed &amp;&amp; !Game.levelSolved)
 {
     var list = ds_list_create();
     for (var i=0;i&lt;instance_number(obj_letterBox);i++)

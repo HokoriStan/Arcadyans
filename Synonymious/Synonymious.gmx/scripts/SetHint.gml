@@ -1,14 +1,25 @@
+var index;
 var list = ds_list_create();
-for (var i=0;i<array_length_1d(Game.inputBox);i++)
+if (argument_count == 0)
 {
-    if (Game.inputBox[i].letterBox == -1 || !Game.inputBox[i].letterBox.locked)
+    for (var i=0;i<array_length_1d(Game.inputBox);i++)
     {
-        ds_list_add(list,i);
+        if (Game.inputBox[i].letterBox == -1 || !Game.inputBox[i].letterBox.locked)
+        {
+            ds_list_add(list,i);
+        }
     }
+    ds_list_shuffle(list);
+    index = ds_list_find_value(list,irandom(ds_list_size(list)-1));
+    ds_list_add(Game.hintIndexes,index);
 }
-ds_list_shuffle(list);
+else
+{
+    show_debug_message("Setting hint to index: "+string(argument[0]));
+    index = argument[0];
+}
 
-var targetInputBox = Game.inputBox[ds_list_find_value(list,irandom(ds_list_size(list)-1))];
+var targetInputBox = Game.inputBox[index];
 var letterToPress = targetInputBox.requiredLetter;
 
 if (targetInputBox.letter != letterToPress)
@@ -34,6 +45,7 @@ if (targetInputBox.letter != letterToPress)
         letterBox.fromXPos = letterBox.x;
         letterBox.fromYPos = letterBox.y;
         letterBox.inputBox = targetInputBox;
+        letterBox.moveSpeed = 40;
         letterSet = true;
         with (obj_inputBox)
         {
@@ -53,5 +65,11 @@ with (obj_inputBox)
 {
     startShake = false;
 }
+if (argument_count != 0)
+{
+    with (obj_levelCompletedMessage)
+    {
+        instance_destroy();
+    }
+}
 ds_list_destroy(list);
-

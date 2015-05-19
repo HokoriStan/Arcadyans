@@ -26,6 +26,10 @@ with (argument[0])
                     fromXPos = x;
                     fromYPos = y;
                     inputBox = Game.inputBox[i];
+                    if (argument_count > 1)
+                    {
+                        moveSpeed = 40;
+                    }
                     break;
                 }
             }
@@ -61,6 +65,10 @@ with (argument[0])
             inputBox.letterBox = -1;
             inputBox = -1;
             shakeCount = 0;
+            if (argument_count > 1)
+            {
+                moveSpeed = 40;
+            }
         }
     }
 }

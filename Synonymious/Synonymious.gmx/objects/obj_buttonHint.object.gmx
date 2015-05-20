@@ -77,7 +77,7 @@ image_speed = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (pressed &amp;&amp; !Game.levelSolved)
+            <string>if (pressed &amp;&amp; !Game.levelSolved &amp;&amp; Game.hintAmount &gt; 0)
 {
     with (obj_letterBox)
     {
@@ -87,6 +87,8 @@ image_speed = 0;
         }
     }
     SetHint();
+    Game.hintAmount --;
+    ds_map_replace(Game.dataMap,"hintAmount",Game.hintAmount);
     SaveLevel(Game.level);
 }
 </string>

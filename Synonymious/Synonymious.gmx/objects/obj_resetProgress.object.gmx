@@ -84,6 +84,7 @@ image_xscale = 3.5;
     {
         file_delete("Data.txt");
         ds_map_clear(Game.dataMap);
+        TryLoadDataMap();
         show_message("Progress deleted.");
     }
 }

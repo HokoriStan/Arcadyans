@@ -26,11 +26,14 @@ for (var i=0;i<string_length(Game.answer);i++)
 {
     var char = string_char_at(Game.answer, i+1);
     ds_list_add(answerLetterList,char);
-    ds_list_add(letterList,char);
+    if (char != " ")
+    {
+        ds_list_add(letterList,char);
+    }
 }
 var letterAmount = 12;
-
-for (var i=0;i<letterAmount-string_length(Game.answer);i++)
+var lettersToAdd = letterAmount-ds_list_size(letterList);
+for (var i=0;i<lettersToAdd;i++)
 {
      ds_list_add(letterList,choose(chr(65+floor(random(26)))));
 }
@@ -84,10 +87,15 @@ for (var i=0;i<string_length(Game.answer);i++)
     var xPos = leftXPos + i * xOffset;
     var yPos = centerYPos;
 
-    Game.inputBox[i] = instance_create(xPos,yPos,obj_inputBox);
-    Game.inputBox[i].requiredLetter = ds_list_find_value(answerLetterList,i);
+    var requiredLetter = ds_list_find_value(answerLetterList,i);
+    if (requiredLetter != " ")
+    {
+        var index = array_length_1d(Game.inputBox);
+        Game.inputBox[index] = instance_create(xPos,yPos,obj_inputBox);
+        Game.inputBox[index].requiredLetter = requiredLetter;
+    }
 }
-if (instance_number(obj_letterBox) <= string_length(Game.answer))
+if (instance_number(obj_letterBox) <= array_length_1d(Game.inputBox))
 {
     obj_buttonRemoveLetter.image_alpha = 0.7;
 }

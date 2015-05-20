@@ -78,20 +78,18 @@ showingHints = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>show_debug_message(string(Game.levelSolved));
-if (pressed &amp;&amp; !Game.levelSolved &amp;&amp; instance_number(obj_letterBox) &gt; string_length(Game.answer))
+            <string>if (pressed &amp;&amp; !Game.levelSolved &amp;&amp; instance_number(obj_letterBox) &gt; array_length_1d(Game.inputBox) &amp;&amp; Game.removeLetterAmount &gt; 0)
 {
     var list = ds_list_create();
     for (var i=0;i&lt;instance_number(obj_letterBox);i++)
     {
         ds_list_add(list,instance_find(obj_letterBox,i).letter);
     }
-    for (var i=0;i&lt;string_length(Game.answer);i++)
+    for (var i=0;i&lt;array_length_1d(Game.inputBox);i++)
     {
-        var char = string_char_at(Game.answer,i+1);
+        var char = Game.inputBox[i].requiredLetter;
         ds_list_delete(list,ds_list_find_index(list,char));
     }
-    show_debug_message("DERPIES1");
     var char = ds_list_find_value(list,irandom(ds_list_size(list)-1));
     ds_list_destroy(list);
     if (is_undefined(char))
@@ -99,7 +97,6 @@ if (pressed &amp;&amp; !Game.levelSolved &amp;&amp; instance_number(obj_letterBo
         exit;
     }
     var letterBox = FindLetterBox(char);
-    show_debug_message("DERPIES2");
     with (letterBox)
     {
         if (id.inputBox != -1)
@@ -109,12 +106,13 @@ if (pressed &amp;&amp; !Game.levelSolved &amp;&amp; instance_number(obj_letterBo
         }
         instance_destroy();
     }
-    if (instance_number(obj_letterBox) == string_length(Game.answer))
+    if (instance_number(obj_letterBox) == array_length_1d(Game.inputBox))
     {
         image_alpha = 0.4;
     }
+    Game.removeLetterAmount--;
+    ds_map_replace(Game.dataMap,"removeLetterAmount",Game.removeLetterAmount);
     SaveLevel(Game.level);
-    show_debug_message("DERPIES3");
 }
 </string>
           </argument>
@@ -138,7 +136,7 @@ if (pressed &amp;&amp; !Game.levelSolved &amp;&amp; instance_number(obj_letterBo
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (instance_number(obj_letterBox) &gt; string_length(Game.answer))
+            <string>if (instance_number(obj_letterBox) &gt; array_length_1d(Game.inputBox))
 {
     pressed = true;
     image_index = 1;

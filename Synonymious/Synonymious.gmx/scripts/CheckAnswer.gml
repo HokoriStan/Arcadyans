@@ -19,6 +19,13 @@ for (var i=0;i<instance_number(obj_inputBox);i++)
 if (levelSolved)
 {
     Game.levelSolved = true;
+    if (!LevelSolved(Game.level))
+    {
+        Game.removeLetterAmount ++;
+        Game.hintAmount ++;
+        ds_map_replace(Game.dataMap,"removeLetterAmount",Game.removeLetterAmount);
+        ds_map_replace(Game.dataMap,"hintAmount",Game.hintAmount);
+    }
     SaveLevel(Game.level);
     if (!instance_exists(obj_levelSolvedText))
     {

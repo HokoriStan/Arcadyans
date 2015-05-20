@@ -34,6 +34,8 @@
     <sprite>sprites\spr_buttonLarge</sprite>
     <sprite>sprites\spr_circle</sprite>
     <sprite>sprites\spr_solved</sprite>
+    <sprite>sprites\spr_iconHint</sprite>
+    <sprite>sprites\spr_iconLetter</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -46,8 +48,10 @@
     <script>scripts\fade_out.gml</script>
     <script>scripts\CreateLevelButtons.gml</script>
     <script>scripts\SaveLevel.gml</script>
-    <script>scripts\LoadDataMap.gml</script>
+    <script>scripts\TryLoadDataMap.gml</script>
     <script>scripts\LoadLevel.gml</script>
+    <script>scripts\SaveDataMap.gml</script>
+    <script>scripts\LevelSolved.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_boxText</font>

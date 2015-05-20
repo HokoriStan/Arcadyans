@@ -40,10 +40,9 @@ level = 0;
 levelSolved = false;
 levelSelectionPage = 0;
 
-hintAmount = 5;
-removeLetterAmount = 5;
+dataMap = ds_map_create();
+TryLoadDataMap();
 
-dataMap = LoadDataMap();
 hintIndexes = ds_list_create();
 
 var file = file_text_open_read("Words with synonyms.txt");
@@ -418,6 +417,18 @@ if (room == rm_levelSelect)
     draw_set_color(c_white);
     draw_set_alpha(1);
     draw_text(x+20,y+50,"Level "+string(Game.level+1));
+    
+    draw_sprite(spr_iconHint,0,x+room_width-80,y+50);
+    
+    var hintText = string(Game.hintAmount);
+    if (Game.hintAmount &lt; 9) {hintText = "0"+hintText;}
+    draw_text(x+room_width-80,y+50,hintText);
+    
+    draw_sprite(spr_iconLetter,0,x+room_width-220,y+50);
+    
+    var removeLetterText = string(Game.removeLetterAmount);
+    if (Game.removeLetterAmount &lt; 9) {removeLetterText = "0"+removeLetterText;}
+    draw_text(x+room_width-220,y+50,removeLetterText);
     
     draw_set_halign(fa_center);
     

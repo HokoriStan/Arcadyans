@@ -68,6 +68,7 @@ initialized = false;
         inst.image_xscale = image_xscale;
         inst.image_yscale = image_yscale;
         inst.alarm[0] = 1;
+        inst.clone = clone;
         
         x -= room_width*other.dir;
         clone = true;

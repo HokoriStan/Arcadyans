@@ -27,6 +27,17 @@
             <kind>1</kind>
             <string>random_set_seed(0);
 
+removeLetterFadeTextOffset = 0;
+removeLetterFadeText = "+1";
+removeLetterFadeTextColor = c_red;
+
+hintFadeTextOffset = 0;
+hintFadeText = "+1";
+hintFadeTextColor = c_red;
+
+flashRemoveLetterCount = 0;
+flashHintCount = 0;
+
 x = 0;
 y = 0;
 
@@ -160,7 +171,27 @@ drag = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (keyboard_check_pressed(vk_space))
+            <string>hintFadeTextOffset += 100/room_speed;
+removeLetterFadeTextOffset += 100/room_speed;
+
+if (flashHintCount &gt; 0)
+{
+    flashHintCount -= 6/room_speed;
+    if (flashHintCount &lt; 0)
+    {
+        flashHintCount = 0;
+    }
+}
+if (flashRemoveLetterCount &gt; 0)
+{
+    flashRemoveLetterCount -= 6/room_speed;
+    if (flashRemoveLetterCount &lt; 0)
+    {
+        flashRemoveLetterCount = 0;
+    }
+}
+
+if (keyboard_check_pressed(vk_space))
 {
     with (instance_create(0,0,obj_surfaceCopy))
     {
@@ -293,6 +324,7 @@ if (!instance_exists(obj_surfaceCopy) &amp;&amp; drag)
     {
         if (room == rm_game &amp;&amp; Game.level &gt; 0)
         {
+            Swipe(-1);
             Game.level --;
             Game.levelSolved = false;
             with (obj_inputBox)
@@ -307,17 +339,9 @@ if (!instance_exists(obj_surfaceCopy) &amp;&amp; drag)
         }
         else if (room == rm_levelSelect &amp;&amp; instance_exists(obj_buttonPreviousPage))
         {
+            Swipe(-1);
             Game.levelSelectionPage --;
             CreateLevelButtons(Game.levelSelectionPage);
-        }
-        else
-        {
-            exit;
-        }
-        with (instance_create(0,0,obj_surfaceCopy))
-        {
-            dir = -1;
-            event_perform(ev_step,0);
         }
         drag = false;
     }
@@ -325,6 +349,7 @@ if (!instance_exists(obj_surfaceCopy) &amp;&amp; drag)
     {
         if (room == rm_game)
         {
+            Swipe(1);
             Game.level ++;
             Game.levelSolved = false;
             with (obj_inputBox)
@@ -339,17 +364,9 @@ if (!instance_exists(obj_surfaceCopy) &amp;&amp; drag)
         }
         else if (room == rm_levelSelect &amp;&amp; instance_exists(obj_buttonNextPage))
         {
+            Swipe(1);
             Game.levelSelectionPage ++;
             CreateLevelButtons(Game.levelSelectionPage);
-        }
-        else
-        {
-            exit;
-        }
-        with (instance_create(0,0,obj_surfaceCopy))
-        {
-            dir = 1;
-            event_perform(ev_step,0);
         }
         drag = false;
     }
@@ -418,18 +435,38 @@ if (room == rm_levelSelect)
     draw_set_alpha(1);
     draw_text(x+20,y+50,"Level "+string(Game.level+1));
     
-    draw_sprite(spr_iconHint,0,x+room_width-80,y+50);
+    draw_sprite(spr_iconHint,0,x+room_width-85,y+50);
     
     var hintText = string(Game.hintAmount);
     if (Game.hintAmount &lt; 9) {hintText = "0"+hintText;}
-    draw_text(x+room_width-80,y+50,hintText);
-    
-    draw_sprite(spr_iconLetter,0,x+room_width-220,y+50);
-    
+    if (floor(flashHintCount mod 2) == 1) {draw_set_color(c_red);}
+    draw_text(x+room_width-85,y+50,hintText);
+    if (hintFadeTextOffset &lt; 50)
+    {
+        draw_set_color(hintFadeTextColor);
+        draw_set_alpha(1-1/50*hintFadeTextOffset);
+        draw_set_halign(fa_right);
+        draw_text(x+room_width-5,y+50+hintFadeTextOffset,hintFadeText);
+        draw_set_color(c_white);
+    }
+    draw_set_color(c_white);
+    draw_set_alpha(1);
+    draw_sprite(spr_iconLetter,0,x+room_width-230,y+50);
+    draw_set_halign(fa_left);
     var removeLetterText = string(Game.removeLetterAmount);
     if (Game.removeLetterAmount &lt; 9) {removeLetterText = "0"+removeLetterText;}
-    draw_text(x+room_width-220,y+50,removeLetterText);
+    if (floor(flashRemoveLetterCount mod 2) == 1) {draw_set_color(c_red);}
+    draw_text(x+room_width-230,y+50,removeLetterText);
+    if (removeLetterFadeTextOffset &lt; 50)
+    {
+        draw_set_color(removeLetterFadeTextColor);
+        draw_set_alpha(1-1/50*removeLetterFadeTextOffset);
+        draw_set_halign(fa_right);
+        draw_text(x+room_width-150,y+50+removeLetterFadeTextOffset,removeLetterFadeText);
+        draw_set_color(c_white);
+    }
     
+    draw_set_color(c_white);
     draw_set_halign(fa_center);
     
     draw_set_font(fnt_synonymFor);

@@ -136,6 +136,7 @@ else if (shadowSize &lt;= targetShadowSize)
           <argument>
             <kind>1</kind>
             <string>draw_set_font(fnt_title);
+draw_set_halign(fa_center);
 if (size == targetSize)
 {
     draw_set_color(c_black);

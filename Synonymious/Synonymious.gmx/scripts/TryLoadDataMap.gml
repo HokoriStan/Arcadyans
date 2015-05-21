@@ -15,7 +15,7 @@ if (file_exists("Data.txt"))
     }
 }
 Game.dataMap = ds_map_create();
-Game.removeLetterAmount = 5;
-Game.hintAmount = 5;
+Game.removeLetterAmount = 3;
+Game.hintAmount = 3;
 ds_map_add(Game.dataMap,"removeLetterAmount",Game.removeLetterAmount);
 ds_map_add(Game.dataMap,"hintAmount",Game.hintAmount);

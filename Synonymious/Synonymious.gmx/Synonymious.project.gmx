@@ -52,6 +52,9 @@
     <script>scripts\LoadLevel.gml</script>
     <script>scripts\SaveDataMap.gml</script>
     <script>scripts\LevelSolved.gml</script>
+    <script>scripts\Swipe.gml</script>
+    <script>scripts\DrawFadeTextHint.gml</script>
+    <script>scripts\DrawFadeTextRemoveLetter.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_boxText</font>

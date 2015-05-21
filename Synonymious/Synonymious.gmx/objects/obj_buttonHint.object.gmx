@@ -77,19 +77,27 @@ image_speed = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (pressed &amp;&amp; !Game.levelSolved &amp;&amp; Game.hintAmount &gt; 0)
+            <string>if (pressed &amp;&amp; !Game.levelSolved)
 {
-    with (obj_letterBox)
+    if (Game.hintAmount &gt; 0)
     {
-        if (x != toXPos || y != toYPos)
+        with (obj_letterBox)
         {
-            exit;
+            if (x != toXPos || y != toYPos)
+            {
+                exit;
+            }
         }
+        SetHint();
+        Game.hintAmount --;
+        ds_map_replace(Game.dataMap,"hintAmount",Game.hintAmount);
+        DrawFadeTextHint(-1);
+        SaveLevel(Game.level);
     }
-    SetHint();
-    Game.hintAmount --;
-    ds_map_replace(Game.dataMap,"hintAmount",Game.hintAmount);
-    SaveLevel(Game.level);
+    else
+    {
+        Game.flashHintCount = 6; 
+    }
 }
 </string>
           </argument>

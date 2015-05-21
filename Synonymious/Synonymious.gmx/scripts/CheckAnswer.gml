@@ -23,6 +23,8 @@ if (levelSolved)
     {
         Game.removeLetterAmount ++;
         Game.hintAmount ++;
+        DrawFadeTextHint(1);
+        DrawFadeTextRemoveLetter(1);
         ds_map_replace(Game.dataMap,"removeLetterAmount",Game.removeLetterAmount);
         ds_map_replace(Game.dataMap,"hintAmount",Game.hintAmount);
     }

@@ -78,41 +78,49 @@ showingHints = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (pressed &amp;&amp; !Game.levelSolved &amp;&amp; instance_number(obj_letterBox) &gt; array_length_1d(Game.inputBox) &amp;&amp; Game.removeLetterAmount &gt; 0)
+            <string>if (pressed &amp;&amp; !Game.levelSolved &amp;&amp; instance_number(obj_letterBox) &gt; array_length_1d(Game.inputBox))
 {
-    var list = ds_list_create();
-    for (var i=0;i&lt;instance_number(obj_letterBox);i++)
+    if (Game.removeLetterAmount &gt; 0)
     {
-        ds_list_add(list,instance_find(obj_letterBox,i).letter);
-    }
-    for (var i=0;i&lt;array_length_1d(Game.inputBox);i++)
-    {
-        var char = Game.inputBox[i].requiredLetter;
-        ds_list_delete(list,ds_list_find_index(list,char));
-    }
-    var char = ds_list_find_value(list,irandom(ds_list_size(list)-1));
-    ds_list_destroy(list);
-    if (is_undefined(char))
-    {
-        exit;
-    }
-    var letterBox = FindLetterBox(char);
-    with (letterBox)
-    {
-        if (id.inputBox != -1)
+        var list = ds_list_create();
+        for (var i=0;i&lt;instance_number(obj_letterBox);i++)
         {
-            id.inputBox.letter = "";
-            id.inputBox.letterBox = -1;
+            ds_list_add(list,instance_find(obj_letterBox,i).letter);
         }
-        instance_destroy();
+        for (var i=0;i&lt;array_length_1d(Game.inputBox);i++)
+        {
+            var char = Game.inputBox[i].requiredLetter;
+            ds_list_delete(list,ds_list_find_index(list,char));
+        }
+        var char = ds_list_find_value(list,irandom(ds_list_size(list)-1));
+        ds_list_destroy(list);
+        if (is_undefined(char))
+        {
+            exit;
+        }
+        var letterBox = FindLetterBox(char);
+        with (letterBox)
+        {
+            if (id.inputBox != -1)
+            {
+                id.inputBox.letter = "";
+                id.inputBox.letterBox = -1;
+            }
+            instance_destroy();
+        }
+        if (instance_number(obj_letterBox) == array_length_1d(Game.inputBox))
+        {
+            image_alpha = 0.4;
+        }
+        Game.removeLetterAmount--;
+        ds_map_replace(Game.dataMap,"removeLetterAmount",Game.removeLetterAmount);
+        DrawFadeTextRemoveLetter(-1);
+        SaveLevel(Game.level);
     }
-    if (instance_number(obj_letterBox) == array_length_1d(Game.inputBox))
+    else
     {
-        image_alpha = 0.4;
+        Game.flashRemoveLetterCount = 6;
     }
-    Game.removeLetterAmount--;
-    ds_map_replace(Game.dataMap,"removeLetterAmount",Game.removeLetterAmount);
-    SaveLevel(Game.level);
 }
 </string>
           </argument>

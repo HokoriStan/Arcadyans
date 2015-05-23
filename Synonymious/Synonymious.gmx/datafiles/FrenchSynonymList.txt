@@ -1,0 +1,10 @@
+heureux	content
+environ	approximativement
+important	décisif
+également	aussi
+beau	magnifique
+rapide	vite
+difficile	compliqué
+aspect	section
+rare	exceptionnel
+section	itinéraire

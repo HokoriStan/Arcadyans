@@ -25,51 +25,19 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>changed = 0
-fadeout = false
-imagesize = random_range(0.1,0.75);
-alpha = random_range(0.25,0.5);
+            <string>var imagesize = random_range(0.1,0.75);
+image_xscale = imagesize;
+image_yscale = imagesize;
+image_alpha = 0;
+image_angle = random(360);
+direction = image_angle;
+speed = random_range(1,2);
 
-image_alpha = 0
-image_xscale = imagesize
-image_yscale = imagesize
-alarm[0] = 1
-
+targetAngle = image_angle;
+fadeOut = false;
+targetAlpha = random_range(0.25,0.5);
+travelDistance = random_range(300,500);
 clone = false;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>move_towards_point(random_range(-512,1280),random_range(-512,1812),random_range(1,2));
-changed += 1
-
-if changed = 10
-    {
-    instance_create(random_range(-512,1280),random_range(-512,1812),obj_circle);
-    fadeout = true
-    }
-else
-    {
-    alarm[0] = random_range(300,450);
-    }
 </string>
           </argument>
         </arguments>
@@ -92,85 +60,59 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///fade_in()
-if changed &lt;= 1
-{
-    if image_alpha &lt;= alpha
-        {
-        image_alpha +=0.01
-        }
-    if image_alpha &gt;= alpha
-        {
-        image_alpha = alpha
-        }
-    }
-
-if fadeout = true
-    {
-    fade_out();
-    }
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>var xBorder = 0;
-var yBorder = 0;
-var width = room_width;
-var height = room_height;
+            <string>var xBorder = -sprite_width/4;
+var yBorder = -sprite_height/4;
+var width = room_width+sprite_width/4;
+var height = room_height+sprite_height/4;
 
 if (instance_exists(obj_surfaceCopy))
 {
-    xBorder = -room_width;
+    xBorder -= room_width;
 }
 
 if (x &lt; xBorder || y &lt; yBorder || x &gt; width || y &gt; height)
 {
-    if (!clone)
-    {
-        instance_create(random_range(-512,1280),random_range(-512,1812),obj_circle);
-    }
-    instance_destroy();
+    fadeOut = true;
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//instance_create(random_range(-512,1280),random_range(-512,1812),obj_circle);
-//instance_destroy();
+
+travelDistance -= speed;
+if (travelDistance &lt;= 0)
+{
+    travelDistance = random_range(300,500);
+    var randomDir = 1;
+    if (irandom(1) == 0)
+    {
+        randomDir = -1;
+    }
+    targetAngle += random_range(0,90) * randomDir;
+}
+if (image_angle != targetAngle)
+{
+    var dd = angle_difference(image_angle, targetAngle);
+    image_angle += min(abs(dd), 0.5) * sign(dd);
+}
+direction = image_angle;
+
+if (fadeOut)
+{
+    image_alpha -= 0.6/room_speed;
+    if (image_alpha &lt;= 0)
+    {
+        if (!clone &amp;&amp; instance_number(obj_circle) &lt; 12)
+        {
+            instance_create(random_range(0,room_width),random_range(0,room_height),obj_circle);
+        }
+        instance_destroy();
+    }
+}
+else if (image_alpha &lt; targetAlpha)
+{
+    image_alpha += 0.6/room_speed;
+    if (image_alpha &gt; targetAlpha)
+    {
+        image_alpha = targetAlpha;
+    }
+}
 </string>
           </argument>
         </arguments>

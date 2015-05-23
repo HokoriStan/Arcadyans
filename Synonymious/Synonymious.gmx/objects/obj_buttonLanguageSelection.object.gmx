@@ -69,10 +69,7 @@ surface1 = -1;
         {
             if (pressed)
             {
-                if (show_question("Are you sure you would like to quit?"))
-                {
-                    game_end();
-                }
+                room_goto(rm_languageSelection);
             }
         }
         
@@ -138,10 +135,10 @@ if (!surface_exists(surface0) || !surface_exists(surface1) || buttonLanguage != 
     buttonLanguage = Game.language;
     switch (buttonLanguage)
     {
-        case "English": text = "Quit";      break;
-        case "Dutch":   text = "Afsluiten"; break;
-        case "French":  text = "Quitter";   break;
-        case "Swedish":  text = "Avsluta";  break;
+        case "English": text = "Change language";   break;
+        case "Dutch":   text = "Wijzig taal";       break;
+        case "French":  text = "Changer langue";    break;
+        case "Swedish":  text = "Ändra språk";      break;
     }
     AssignSurfaces(text);
 }

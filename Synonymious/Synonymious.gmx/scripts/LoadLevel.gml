@@ -10,7 +10,7 @@ if (ds_map_exists(Game.dataMap,"Level "+string(level)))
     Game.levelSolved = string_char_at(data,1) == "1";
     data = string_copy(data,2,string_length(data)-1);
 
-    while (string_length(data) > 0 && (string_byte_at(data,1) >= 65 || string_char_at(data,1) == " ") )
+    while (string_length(data) > 0 && (ord(data) >= 65 || string_char_at(data,1) == " ") )
     {
         ds_list_add(letterList,string_char_at(data,1));
         data = string_copy(data,2,string_length(data)-1);

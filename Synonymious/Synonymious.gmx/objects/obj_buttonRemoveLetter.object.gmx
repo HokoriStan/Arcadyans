@@ -28,12 +28,14 @@
             <string>pressed = false;
 image_speed = 0;
 buttonLanguage = "";
+surface0 = -1;
+surface1 = -1;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="6" enumb="56">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -50,105 +52,74 @@ buttonLanguage = "";
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (pressed)
+            <string>if (surface0 != -1)
 {
-    pressed = false;
-    image_index = 0;
-    y -= 9;
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="7">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if (pressed &amp;&amp; !Game.levelSolved &amp;&amp; instance_number(obj_letterBox) &gt; array_length_1d(Game.inputBox))
-{
-    if (Game.removeLetterAmount &gt; 0)
+    if (mouse_check_button_pressed(mb_left) &amp;&amp; instance_number(obj_letterBox) &gt; array_length_1d(Game.inputBox))
     {
-        var list = ds_list_create();
-        for (var i=0;i&lt;instance_number(obj_letterBox);i++)
+        if (SurfaceContainsMouse(surface0))
         {
-            ds_list_add(list,instance_find(obj_letterBox,i).letter);
+            pressed = true;
+            image_index = 1;
+            y += 9;
         }
-        for (var i=0;i&lt;array_length_1d(Game.inputBox);i++)
+    }
+    if (mouse_check_button_released(mb_left))
+    {
+        if (SurfaceContainsMouse(surface0))
         {
-            var char = Game.inputBox[i].requiredLetter;
-            ds_list_delete(list,ds_list_find_index(list,char));
-        }
-        var char = ds_list_find_value(list,irandom(ds_list_size(list)-1));
-        ds_list_destroy(list);
-        if (is_undefined(char))
-        {
-            exit;
-        }
-        var letterBox = FindLetterBox(char);
-        with (letterBox)
-        {
-            if (id.inputBox != -1)
+            if (pressed &amp;&amp; !Game.levelSolved &amp;&amp; instance_number(obj_letterBox) &gt; array_length_1d(Game.inputBox))
             {
-                id.inputBox.letter = "";
-                id.inputBox.letterBox = -1;
+                if (Game.removeLetterAmount &gt; 0)
+                {
+                    var list = ds_list_create();
+                    for (var i=0;i&lt;instance_number(obj_letterBox);i++)
+                    {
+                        ds_list_add(list,instance_find(obj_letterBox,i).letter);
+                    }
+                    for (var i=0;i&lt;array_length_1d(Game.inputBox);i++)
+                    {
+                        var char = Game.inputBox[i].requiredLetter;
+                        ds_list_delete(list,ds_list_find_index(list,char));
+                    }
+                    var char = ds_list_find_value(list,irandom(ds_list_size(list)-1));
+                    ds_list_destroy(list);
+                    if (is_undefined(char))
+                    {
+                        exit;
+                    }
+                    var letterBox = FindLetterBox(char);
+                    with (letterBox)
+                    {
+                        if (id.inputBox != -1)
+                        {
+                            id.inputBox.letter = "";
+                            id.inputBox.letterBox = -1;
+                        }
+                        instance_destroy();
+                    }
+                    if (instance_number(obj_letterBox) == array_length_1d(Game.inputBox))
+                    {
+                        image_alpha = 0.4;
+                    }
+                    Game.removeLetterAmount--;
+                    ds_map_replace(Game.dataMap,"removeLetterAmount",Game.removeLetterAmount);
+                    DrawFadeTextRemoveLetter(-1);
+                    SaveLevel(Game.level);
+                }
+                else
+                {
+                    Game.flashRemoveLetterCount = 6;
+                }
             }
-            instance_destroy();
         }
-        if (instance_number(obj_letterBox) == array_length_1d(Game.inputBox))
+        
+        if (pressed)
         {
-            image_alpha = 0.4;
+            pressed = false;
+            image_index = 0;
+            y -= 9;
         }
-        Game.removeLetterAmount--;
-        ds_map_replace(Game.dataMap,"removeLetterAmount",Game.removeLetterAmount);
-        DrawFadeTextRemoveLetter(-1);
-        SaveLevel(Game.level);
     }
-    else
-    {
-        Game.flashRemoveLetterCount = 6;
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="4">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if (instance_number(obj_letterBox) &gt; array_length_1d(Game.inputBox))
-{
-    pressed = true;
-    image_index = 1;
-    y += 9;
 }
 </string>
           </argument>
@@ -172,7 +143,7 @@ buttonLanguage = "";
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>sprite_delete(spriteIndex);
+            <string>ClearButtonSurfaces();
 </string>
           </argument>
         </arguments>
@@ -199,19 +170,30 @@ buttonLanguage = "";
 draw_set_valign(fa_middle);
 draw_set_font(fnt_boxText);
 
-if (sprite_index == -1 || buttonLanguage != Game.language)
+if (!surface_exists(surface0) || !surface_exists(surface1) || buttonLanguage != Game.language)
 {
     buttonLanguage = Game.language;
     switch (Game.language)
     {
         case "English": text = "Remove letter";     break;
         case "Dutch":   text = "Verwijder letter";  break;
-        case "French":  text = "Retirer lettre";    break;
+        case "French":  text = "Enlever lettre";    break;
+        case "Swedish":  text = "Ta bort bokstav";  break;
     }
-    AssignButtonToSprite(text);
+    AssignSurfaces(text);
 }
 
-draw_self();
+var surfaceToDraw;
+if (image_index == 0)
+{
+    surfaceToDraw = surface0;
+}
+else
+{
+    surfaceToDraw = surface1;
+}
+
+draw_surface(surfaceToDraw,x-surface_get_width(surfaceToDraw)/2,y-surface_get_height(surfaceToDraw)/2+9);
 
 draw_set_color(c_black);
 draw_set_alpha(0.25);

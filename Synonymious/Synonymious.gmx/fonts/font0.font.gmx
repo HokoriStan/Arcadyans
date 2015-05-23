@@ -14,6 +14,22 @@
   </texgroups>
   <ranges>
     <range0>32,127</range0>
+    <range0>192,192</range0>
+    <range0>194,194</range0>
+    <range0>196,197</range0>
+    <range0>199,203</range0>
+    <range0>206,207</range0>
+    <range0>212,212</range0>
+    <range0>217,217</range0>
+    <range0>219,219</range0>
+    <range0>224,224</range0>
+    <range0>226,226</range0>
+    <range0>228,229</range0>
+    <range0>231,235</range0>
+    <range0>238,239</range0>
+    <range0>244,244</range0>
+    <range0>249,249</range0>
+    <range0>251,251</range0>
   </ranges>
   <glyphs>
     <glyph character="113" x="96" y="2" w="33" h="74" shift="30" offset="1"/>

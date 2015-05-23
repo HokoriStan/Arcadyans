@@ -83,11 +83,13 @@ image_speed = 0;
     {
         random_set_seed(0);
         language = "English";
-        
+        var file = file_text_open_write("GeneralInfo.txt");
+        file_text_write_string(file,language);
+        file_text_close(file);
         TryLoadDataMap();
         LoadSynonymMap(string(language)+"SynonymList");
     }
-    show_message("Switched to the "+Game.language+" version of synonyms.");
+    room_goto(rm_menu);
 }
 </string>
           </argument>

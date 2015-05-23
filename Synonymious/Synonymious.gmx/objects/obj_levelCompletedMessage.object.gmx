@@ -95,7 +95,7 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_font(fnt_questionText);
+            <string>draw_set_font(fnt_synonymFor);
 draw_set_halign(fa_center);
 
 if (!initialized)
@@ -108,11 +108,11 @@ if (!initialized)
 
 draw_set_color(c_black);
 draw_set_alpha(0.25);
-draw_text(x, y+8, levelSolvedText);
+draw_text_transformed(x, y+8, levelSolvedText,0.8,0.8,0);
 
 draw_set_color(c_white);
 draw_set_alpha(1);
-draw_text(x, y, levelSolvedText);
+draw_text_transformed(x, y, levelSolvedText,0.8,0.8,0);
 </string>
           </argument>
         </arguments>

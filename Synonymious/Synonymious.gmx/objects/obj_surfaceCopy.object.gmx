@@ -58,17 +58,24 @@ initialized = false;
     
     with (obj_circle)
     {
-        var inst = instance_create(x,y,obj_circle);
-        inst.changed = changed;
-        inst.fadeout = fadeout;
-        inst.imagesize = imagesize;
-        inst.alpha = alpha;
-        
-        inst.image_alpha = image_alpha;
-        inst.image_xscale = image_xscale;
+        if (!clone)
+        {
+            var inst = instance_create(random_range(0,room_width),random_range(0,room_height),obj_circle);
+            inst.image_alpha = inst.targetAlpha;
+        }
+        /*inst.image_xscale = image_xscale;
         inst.image_yscale = image_yscale;
-        inst.alarm[0] = 1;
-        inst.clone = clone;
+        inst.image_alpha = image_alpha;
+        inst.image_angle = image_angle;
+        inst.direction = direction;
+        inst.speed = speed;
+        
+        inst.targetAlpha = targetAlpha;
+        inst.targetAngle = targetAngle;
+        inst.fadeOut = fadeOut;
+        inst.targetAlpha = targetAlpha;
+        inst.travelDistance = travelDistance;
+        inst.clone = clone;*/
         
         x -= room_width*other.dir;
         clone = true;

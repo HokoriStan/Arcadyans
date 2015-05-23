@@ -7,7 +7,7 @@ var yOffset = sprite_get_height(spr_buttonSquareSmall)+spacing;
 
 var centerX = room_width/2;
 var leftXPos = centerX - (horizontalLevels/2 * xOffset) + xOffset/2;
-var topYPos = 350;
+var topYPos = 450;
 
 with (obj_buttonLevel)
 {
@@ -45,7 +45,7 @@ if (level >= ds_map_size(Game.synonymMap))
 }
 else if (!instance_exists(obj_buttonNextPage))
 {
-    instance_create(leftXPos+(horizontalLevels-1)*xOffset,room_height*0.85,obj_buttonNextPage);
+    instance_create(leftXPos+(horizontalLevels-1)*xOffset,room_height*0.9,obj_buttonNextPage);
 }
 if (Game.levelSelectionPage == 0)
 {
@@ -56,5 +56,5 @@ if (Game.levelSelectionPage == 0)
 }
 else if (!instance_exists(obj_buttonPreviousPage))
 {
-    instance_create(leftXPos,room_height*0.85,obj_buttonPreviousPage);
+    instance_create(leftXPos,room_height*0.9,obj_buttonPreviousPage);
 }

@@ -3,9 +3,9 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="1" name="datafiles">
+  <datafiles number="2" name="datafiles">
     <datafile>
-      <name>Words with synonyms.txt</name>
+      <name>EnglishSynonymList.txt</name>
       <exists>-1</exists>
       <size>0</size>
       <exportAction>2</exportAction>
@@ -19,7 +19,24 @@
           <CopyToMask>9223372036854775807</CopyToMask>
         </Config>
       </ConfigOptions>
-      <filename>Words with synonyms.txt</filename>
+      <filename>EnglishSynonymList.txt</filename>
+    </datafile>
+    <datafile>
+      <name>DutchSynonymList.txt</name>
+      <exists>-1</exists>
+      <size>7731</size>
+      <exportAction>2</exportAction>
+      <exportDir></exportDir>
+      <overwrite>0</overwrite>
+      <freeData>-1</freeData>
+      <removeEnd>0</removeEnd>
+      <store>0</store>
+      <ConfigOptions>
+        <Config name="Default">
+          <CopyToMask>9223372036854775807</CopyToMask>
+        </Config>
+      </ConfigOptions>
+      <filename>DutchSynonymList.txt</filename>
     </datafile>
   </datafiles>
   <NewExtensions/>
@@ -36,6 +53,17 @@
     <sprite>sprites\spr_solved</sprite>
     <sprite>sprites\spr_iconHint</sprite>
     <sprite>sprites\spr_iconLetter</sprite>
+    <sprites name="Flags">
+      <sprite>sprites\spr_englishFlag</sprite>
+      <sprite>sprites\spr_englishFlagOld</sprite>
+      <sprite>sprites\spr_dutchFlagOld</sprite>
+      <sprite>sprites\spr_dutchFlag</sprite>
+    </sprites>
+    <sprites name="ButtonParts">
+      <sprite>sprites\spr_buttonTopLeft</sprite>
+      <sprite>sprites\spr_buttonBottomLeft</sprite>
+      <sprite>sprites\spr_buttonBottom</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -48,13 +76,18 @@
     <script>scripts\fade_out.gml</script>
     <script>scripts\CreateLevelButtons.gml</script>
     <script>scripts\SaveLevel.gml</script>
-    <script>scripts\TryLoadDataMap.gml</script>
     <script>scripts\LoadLevel.gml</script>
-    <script>scripts\SaveDataMap.gml</script>
     <script>scripts\LevelSolved.gml</script>
     <script>scripts\Swipe.gml</script>
     <script>scripts\DrawFadeTextHint.gml</script>
     <script>scripts\DrawFadeTextRemoveLetter.gml</script>
+    <scripts name="Loading and saving">
+      <script>scripts\LoadSynonymMap.gml</script>
+      <script>scripts\SaveDataMap.gml</script>
+      <script>scripts\TryLoadDataMap.gml</script>
+    </scripts>
+    <script>scripts\DrawButton.gml</script>
+    <script>scripts\AssignButtonToSprite.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_boxText</font>
@@ -80,8 +113,13 @@
     <object>objects\obj_buttonPreviousPage</object>
     <object>objects\obj_levelSolvedText</object>
     <object>objects\obj_surfaceCopy</object>
+    <objects name="Flags">
+      <object>objects\obj_dutchFlag</object>
+      <object>objects\obj_englishFlag</object>
+    </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_startup</room>
     <room>rooms\rm_menu</room>
     <room>rooms\rm_levelSelect</room>
     <room>rooms\rm_game</room>

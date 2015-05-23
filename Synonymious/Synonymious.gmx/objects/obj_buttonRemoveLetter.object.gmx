@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>pressed = false;
 image_speed = 0;
-showingHints = 0;
+buttonLanguage = "";
 </string>
           </argument>
         </arguments>
@@ -155,6 +155,29 @@ showingHints = 0;
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>sprite_delete(spriteIndex);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -172,14 +195,31 @@ showingHints = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
-draw_set_font(fnt_boxText);
-draw_set_halign(fa_center);
+            <string>draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
-draw_set_color(4144959);
-draw_set_alpha(image_alpha);
-draw_text(x,y,"Remove letter");
+draw_set_font(fnt_boxText);
+
+if (sprite_index == -1 || buttonLanguage != Game.language)
+{
+    buttonLanguage = Game.language;
+    switch (Game.language)
+    {
+        case "English": text = "Remove letter";     break;
+        case "Dutch":   text = "Verwijder letter";  break;
+        case "French":  text = "Retirer lettre";    break;
+    }
+    AssignButtonToSprite(text);
+}
+
+draw_self();
+
+draw_set_color(c_black);
+draw_set_alpha(0.25);
+draw_text(x,y+6,text);
+
+draw_set_color(4210752);
 draw_set_alpha(1);
+draw_text(x,y,text);
 </string>
           </argument>
         </arguments>

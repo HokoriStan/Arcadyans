@@ -26,6 +26,10 @@
           <argument>
             <kind>1</kind>
             <string>random_set_seed(0);
+application_surface_enable(false);
+device_mouse_dbclick_enable(false);
+
+language = "English";
 
 removeLetterFadeTextOffset = 0;
 removeLetterFadeText = "+1";
@@ -56,46 +60,7 @@ TryLoadDataMap();
 
 hintIndexes = ds_list_create();
 
-var file = file_text_open_read("Words with synonyms.txt");
-application_surface_enable(false);
-device_mouse_dbclick_enable(false);
-
-
-synonymMap = ds_map_create();
-var keyList = ds_list_create();
-var i = 0;
-while (!file_text_eof(file))
-{
-    var line = file_text_read_string(file);
-    var tab = chr(vk_tab);
-    var tabPos = string_pos(tab,line);
-    var key = string_copy(line,0,tabPos-1);
-    
-    var byte = string_byte_at(key,0);
-    if (byte &gt;= 97)
-    {
-        byte -= 32;
-        key = chr(byte)+string_delete(key,1,1);
-    }
-    
-    var value = string_copy(line,tabPos+1,string_length(line)-tabPos);
-    value = string_upper(value);
-    if (string_length(value) &gt; 12)
-    {
-        show_debug_message(key+" - "+value+" has exeeded the max length of 12 characters: "+string(string_length(value)));
-    }
-    ds_map_add(synonymMap,key,value);
-    ds_list_add(keyList,key);
-    i++;
-    file_text_readln(file);
-}
-
-ds_list_shuffle(keyList);
-for (var i=0;i&lt;ds_list_size(keyList);i++)
-{
-    keyArray[i] = ds_list_find_value(keyList,i);
-}
-ds_list_destroy(keyList);
+LoadSynonymMap("EnglishSynonymList");
 </string>
           </argument>
         </arguments>
@@ -407,6 +372,29 @@ if (room == rm_levelSelect)
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>room_goto(rm_menu);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -471,13 +459,22 @@ if (room == rm_levelSelect)
     
     draw_set_font(fnt_synonymFor);
     
+    var text;
+    switch (Game.language)
+    {
+        case "English": text = "Synonym for:";      break;
+        case "Dutch":   text = "Synoniem voor:";    break;
+        case "French":  text = "Synonyme de:";      break;
+    }
+    
     draw_set_color(c_black);
     draw_set_alpha(0.25);
-    draw_text(x+room_width/2,y+room_height*0.15+5,"Synonym for:");
+    draw_text(x+room_width/2,y+room_height*0.15+5,text);
     
     draw_set_color(c_white);
     draw_set_alpha(1);
-    draw_text(x+room_width/2,y+room_height*0.15,"Synonym for:");
+    draw_text(x+room_width/2,y+room_height*0.15,text);
+    
     
     draw_set_font(fnt_questionText);
     
@@ -513,13 +510,21 @@ else if (room == rm_levelSelect)
 {
     draw_set_font(fnt_title);
     
+    var text;
+    switch (Game.language)
+    {
+        case "English": text = "Level selection";       break;
+        case "Dutch":   text = "Level selectie";        break;
+        case "French":  text = "Sélection de niveau";   break;
+    }
+    
     draw_set_color(c_black);
     draw_set_alpha(0.25);
-    draw_text_transformed(room_width/2,room_height*0.1+8,"Level selection",0.8,0.8,10);
+    draw_text_transformed(room_width/2,room_height*0.1+8,text,0.8,0.8,10);
     
     draw_set_color(c_white);
     draw_set_alpha(1);
-    draw_text_transformed_colour(room_width/2,room_height*0.1,"Level selection",0.8,0.8,10,c_white,15790320,c_white,15132390,1); 
+    draw_text_transformed_colour(room_width/2,room_height*0.1,text,0.8,0.8,10,c_white,15790320,c_white,15132390,1); 
 }
 </string>
           </argument>

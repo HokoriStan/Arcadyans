@@ -98,6 +98,7 @@
       <sprite>sprites\spr_buttonBottomLeft</sprite>
       <sprite>sprites\spr_buttonBottom</sprite>
     </sprites>
+    <sprite>sprites\spr_hudbck</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -155,6 +156,7 @@
       <object>objects\obj_frenchFlag</object>
       <object>objects\obj_swedishFlag</object>
     </objects>
+    <object>objects\obj_hudbck</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_startup</room>

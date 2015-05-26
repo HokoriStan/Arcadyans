@@ -1,4 +1,4 @@
-heureux	content
+﻿heureux	content
 environ	approximativement
 important	décisif
 également	aussi
@@ -8,3 +8,12 @@ difficile	compliqué
 aspect	section
 rare	exceptionnel
 section	itinéraire
+vieux	ancien
+nouveau	récent
+toilettes	cabinets
+vélo	bicyclette
+maman	mère
+entrer	pénétrer
+changer	muer
+pile	batterie
+argent	monnaie

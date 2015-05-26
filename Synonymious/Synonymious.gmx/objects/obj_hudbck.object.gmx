@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_xscale = room_width
+            <string>x = -room_width;
+image_xscale = room_width*3;
 image_alpha = 0.5
 </string>
           </argument>

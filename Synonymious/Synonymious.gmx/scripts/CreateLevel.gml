@@ -76,7 +76,7 @@ for (var i=0;i<letterAmount;i++)
 var centerXPos = room_width*0.5;
 var centerYPos = room_height*0.5;
 
-var spacing = 5;
+var spacing = 4;
 var xOffset = sprite_get_width(spr_empty)+spacing;
 var yOffset = sprite_get_height(spr_empty)+spacing;
 

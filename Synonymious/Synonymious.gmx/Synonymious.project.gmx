@@ -153,9 +153,10 @@
     <object>objects\obj_circle</object>
     <object>objects\obj_levelCompletedMessage</object>
     <object>objects\obj_buttonPlay</object>
+    <object>objects\obj_languageSelectionDone</object>
     <object>objects\obj_buttonLanguageSelection</object>
-    <object>objects\obj_resetProgress</object>
     <object>objects\obj_buttonQuit</object>
+    <object>objects\obj_resetProgress</object>
     <object>objects\Menu</object>
     <object>objects\obj_buttonLevel</object>
     <object>objects\obj_buttonNextPage</object>

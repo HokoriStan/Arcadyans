@@ -31,10 +31,21 @@ while (!file_text_eof(file))
     file_text_readln(file);
 }
 
-ds_list_shuffle(keyList);
+//ds_list_shuffle(keyList);
 for (var i=0;i<ds_list_size(keyList);i++)
 {
     Game.keyArray[i] = ds_list_find_value(keyList,i);
 }
 ds_list_destroy(keyList);
+file_text_close(file);
+
+/*var file = file_text_open_write(Game.language+"SynonymListShuffled.txt");
+for (var i=0;i<array_length_1d(Game.keyArray);i++)
+{
+    file_text_write_string(file, Game.keyArray[i] +chr(vk_tab)+ ds_map_find_value(Game.synonymMap,Game.keyArray[i]));
+    if (i != array_length_1d(Game.keyArray)-1)
+    {
+        file_text_writeln(file);
+    }
+}
 file_text_close(file);

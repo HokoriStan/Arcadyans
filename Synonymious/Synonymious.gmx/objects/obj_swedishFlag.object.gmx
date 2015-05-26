@@ -63,7 +63,7 @@ if (mouse_check_button_released(mb_left))
 {
     if (ButtonContainsMouse(sprite_width,sprite_height))
     {
-        if (pressed)
+        if (pressed &amp;&amp; Game.language != "Swedish")
         {
             with (Game)
             {
@@ -75,7 +75,6 @@ if (mouse_check_button_released(mb_left))
                 TryLoadDataMap();
                 LoadSynonymMap(string(language)+"SynonymList");
             }
-            room_goto(rm_menu);
         }
     }
     

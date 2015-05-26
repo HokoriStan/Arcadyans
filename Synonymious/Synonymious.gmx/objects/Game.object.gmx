@@ -554,11 +554,11 @@ else if (room == rm_levelSelect)
     
     draw_set_color(c_black);
     draw_set_alpha(0.25);
-    draw_text_transformed(room_width/2,room_height*0.15+8,text,1,1,10);
+    draw_text_transformed(room_width/2,room_height*0.15+8,text,1,1,0);
     
     draw_set_color(c_white);
     draw_set_alpha(1);
-    draw_text_transformed_colour(room_width/2,room_height*0.15,text,1,1,10,c_white,15790320,c_white,15132390,1); 
+    draw_text_transformed_colour(room_width/2,room_height*0.15,text,1,1,0,c_white,15790320,c_white,15132390,1); 
 }
 else if (room == rm_languageSelection)
 {
@@ -577,11 +577,11 @@ else if (room == rm_languageSelection)
     
     draw_set_color(c_black);
     draw_set_alpha(0.25);
-    draw_text_transformed(room_width/2,room_height*0.15+8,text,1,1,10);
+    draw_text_transformed(room_width/2,room_height*0.15+8,text,1,1,0);
     
     draw_set_color(c_white);
     draw_set_alpha(1);
-    draw_text_transformed_colour(room_width/2,room_height*0.15,text,1,1,10,c_white,15790320,c_white,15132390,1); 
+    draw_text_transformed_colour(room_width/2,room_height*0.15,text,1,1,0,c_white,15790320,c_white,15132390,1); 
 }
 </string>
           </argument>

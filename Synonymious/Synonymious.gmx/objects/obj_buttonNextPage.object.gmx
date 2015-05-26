@@ -32,7 +32,7 @@ image_speed = 0;
         </arguments>
       </action>
     </event>
-    <event eventtype="6" enumb="56">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -49,64 +49,34 @@ image_speed = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (pressed)
+            <string>if (mouse_check_button_pressed(mb_left))
 {
-    pressed = false;
-    image_index = 0;
-    y -= 9;
+    if (ButtonContainsMouse(sprite_width,sprite_height))
+    {
+        audio_play_sound(snd_click,0,false);
+        pressed = true;
+        image_index = 1;
+        y += 9;
+    }
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="7">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if (pressed)
+if (mouse_check_button_released(mb_left))
 {
-    Game.levelSelectionPage ++;
-    CreateLevelButtons(Game.levelSelectionPage);
+    if (ButtonContainsMouse(sprite_width,sprite_height))
+    {
+        if (pressed)
+        {
+            Game.levelSelectionPage ++;
+            CreateLevelButtons(Game.levelSelectionPage);
+        }
+    }
+    
+    if (pressed)
+    {
+        pressed = false;
+        image_index = 0;
+        y -= 9;
+    }
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="4">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>pressed = true;
-image_index = 1;
-y += 9;
 </string>
           </argument>
         </arguments>

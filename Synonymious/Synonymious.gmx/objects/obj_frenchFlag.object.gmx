@@ -68,7 +68,7 @@ if (mouse_check_button_released(mb_left))
             with (Game)
             {
                 random_set_seed(0);
-                language = "Dutch";
+                language = "French";
                 var file = file_text_open_write("GeneralInfo.txt");
                 file_text_write_string(file,language);
                 file_text_close(file);

@@ -100,7 +100,6 @@
       <sprite>sprites\spr_buttonBottomLeft</sprite>
       <sprite>sprites\spr_buttonBottom</sprite>
     </sprites>
-<<<<<<< HEAD
     <sprites name="SolvedText">
       <sprite>sprites\spr_solvedTextFrench</sprite>
       <sprite>sprites\spr_solvedTextEnglish</sprite>
@@ -109,9 +108,7 @@
     </sprites>
     <sprite>sprites\spr_title</sprite>
     <sprite>sprites\spr_blankSprite</sprite>
-=======
     <sprite>sprites\spr_hudbck</sprite>
->>>>>>> origin/master
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -171,11 +168,8 @@
       <object>objects\obj_frenchFlag</object>
       <object>objects\obj_swedishFlag</object>
     </objects>
-<<<<<<< HEAD
     <object>objects\obj_solved</object>
-=======
     <object>objects\obj_hudbck</object>
->>>>>>> origin/master
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_startup</room>

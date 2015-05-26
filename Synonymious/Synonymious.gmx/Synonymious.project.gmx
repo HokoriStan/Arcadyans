@@ -74,7 +74,9 @@
     </datafile>
   </datafiles>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\snd_click</sound>
+  </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_empty</sprite>
     <sprite>sprites\spr_full</sprite>
@@ -98,6 +100,14 @@
       <sprite>sprites\spr_buttonBottomLeft</sprite>
       <sprite>sprites\spr_buttonBottom</sprite>
     </sprites>
+    <sprites name="SolvedText">
+      <sprite>sprites\spr_solvedTextFrench</sprite>
+      <sprite>sprites\spr_solvedTextEnglish</sprite>
+      <sprite>sprites\spr_solvedTextDutch</sprite>
+      <sprite>sprites\spr_solvedTextSwedish</sprite>
+    </sprites>
+    <sprite>sprites\spr_title</sprite>
+    <sprite>sprites\spr_blankSprite</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -121,10 +131,12 @@
       <script>scripts\TryLoadDataMap.gml</script>
     </scripts>
     <script>scripts\DrawButton.gml</script>
-    <script>scripts\AssignSurfaces.gml</script>
-    <script>scripts\SurfaceContainsMouse.gml</script>
-    <script>scripts\ClearButtonSurfaces.gml</script>
+    <script>scripts\ButtonContainsMouse.gml</script>
     <script>scripts\StringUpper.gml</script>
+    <script>scripts\draw_rectangle_custom.gml</script>
+    <script>scripts\draw_sprite_custom.gml</script>
+    <script>scripts\draw_sprite_stretched_custom.gml</script>
+    <script>scripts\draw_sprite_ext_custom.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_boxText</font>
@@ -155,6 +167,7 @@
       <object>objects\obj_frenchFlag</object>
       <object>objects\obj_swedishFlag</object>
     </objects>
+    <object>objects\obj_solved</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_startup</room>

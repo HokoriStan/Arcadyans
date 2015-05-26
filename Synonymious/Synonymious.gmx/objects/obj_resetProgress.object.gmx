@@ -28,8 +28,8 @@
             <string>pressed = false;
 image_speed = 0;
 buttonLanguage = "";
-surface0 = -1;
-surface1 = -1;
+width = -1;
+height = -1;
 </string>
           </argument>
         </arguments>
@@ -52,64 +52,53 @@ surface1 = -1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (surface0 != -1)
+            <string>if (mouse_check_button_pressed(mb_left))
 {
-    if (mouse_check_button_pressed(mb_left))
+    if (ButtonContainsMouse(width,height))
     {
-        if (SurfaceContainsMouse(surface0))
-        {
-            pressed = true;
-            image_index = 1;
-            y += 9;
-        }
-    }
-    if (mouse_check_button_released(mb_left))
-    {
-        if (SurfaceContainsMouse(surface0))
-        {
-            if (pressed)
-            {
-                if (show_question("Are you sure you would like to reset all your progress?"))
-                {
-                    file_delete("Data.txt");
-                    ds_map_clear(string(Game.language)+"Data.txt");
-                    TryLoadDataMap();
-                    show_message("Progress deleted.");
-                }
-            }
-        }
-        
-        if (pressed)
-        {
-            pressed = false;
-            image_index = 0;
-            y -= 9;
-        }
+        audio_play_sound(snd_click,0,false);
+        pressed = true;
+        image_index = 1;
+        y += 9;
     }
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="5">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>ClearButtonSurfaces();
+if (mouse_check_button_released(mb_left))
+{
+    if (ButtonContainsMouse(width,height))
+    {
+        if (pressed)
+        {
+            var text;
+            switch (Game.language)
+            {
+                case "English": text = "Are you sure you would like to delete all your progress?";  break;
+                case "Dutch":   text = "Weet je zeker dat u all uw voortgang wilt verwijderen?";    break;
+                case "French":  text = "Êtes-vous sûr de vouloir supprimer tous vos progrès?";      break;
+                case "Swedish": text = "Är du säker på att du vill ta bort alla dina framsteg?";    break;
+            }
+            if (show_question(text))
+            {
+                file_delete(string(Game.language)+"Data.txt");
+                TryLoadDataMap();
+                switch (Game.language)
+                {
+                    case "English": text = "Progress deleted.";     break;
+                    case "Dutch":   text = "Voortgang verwijderd."; break;
+                    case "French":  text = "Progrès supprimé.";     break;
+                    case "Swedish": text = "Framsteg utgå.";        break;
+                }
+                show_message(text);
+            }
+        }
+    }
+    
+    if (pressed)
+    {
+        pressed = false;
+        image_index = 0;
+        y -= 9;
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -136,38 +125,22 @@ surface1 = -1;
 draw_set_valign(fa_middle);
 draw_set_font(fnt_synonymFor);
 
-if (!surface_exists(surface0) || !surface_exists(surface1) || buttonLanguage != Game.language)
+switch (Game.language)
 {
-    buttonLanguage = Game.language;
-    switch (Game.language)
-    {
-        case "English": text = "Reset progress";        break;
+    case "English": text = "Reset progress";        break;
         case "Dutch":   text = "Voortgang wissen";      break;
         case "French":  text = "Effacer progrès";       break;
         case "Swedish": text = "Återställ framsteg";    break;
-    }
-    AssignSurfaces(text);
 }
-
-var surfaceToDraw;
-if (image_index == 0)
-{
-    surfaceToDraw = surface0;
-}
-else
-{
-    surfaceToDraw = surface1;
-}
-
-draw_surface(surfaceToDraw,x-surface_get_width(surfaceToDraw)/2,y-surface_get_height(surfaceToDraw)/2+9);
+DrawButton(x,y,string_width(text),string_height(text));
 
 draw_set_color(c_black);
 draw_set_alpha(0.25);
-draw_text(x,y+6,text);
+draw_text_transformed(x,y+3,text,0.7,0.7,0);
 
 draw_set_color(4210752);
 draw_set_alpha(1);
-draw_text(x,y,text);
+draw_text_transformed(x,y,text,0.7,0.7,0);
 </string>
           </argument>
         </arguments>

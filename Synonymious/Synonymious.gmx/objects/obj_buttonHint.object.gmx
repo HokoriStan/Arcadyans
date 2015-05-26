@@ -28,17 +28,8 @@
             <string>pressed = false;
 image_speed = 0;
 buttonLanguage = "";
-surface0 = -1;
-surface1 = -1;
-
-//Used to initialize the text variable so it can be used by obj_buttonShuffle creating the button with the same size
-switch (Game.language)
-{
-    case "English": text = "Hint";      break;
-    case "Dutch":   text = "Tip";       break;
-    case "French":  text = "Indice";    break;
-    case "Swedish":  text = "Ledtråd";  break;
-}
+width = -1;
+height = -1;
 </string>
           </argument>
         </arguments>
@@ -61,82 +52,57 @@ switch (Game.language)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (surface0 != -1)
+            <string>if (mouse_check_button_pressed(mb_left))
 {
-    if (mouse_check_button_pressed(mb_left))
+    if (ButtonContainsMouse(width,height))
     {
-        if (SurfaceContainsMouse(surface0))
-        {
-            pressed = true;
-            image_index = 1;
-            y += 9;
-        }
-    }
-    if (mouse_check_button_released(mb_left))
-    {
-        if (SurfaceContainsMouse(surface0))
-        {
-            if (pressed &amp;&amp; !Game.levelSolved)
-            {
-                if (Game.hintAmount &gt; 0)
-                {
-                    var noneMoving = true;
-                    for (var i=0;i&lt;instance_number(obj_letterBox);i++)
-                    {
-                        var instance = instance_find(obj_letterBox,i);
-                        if (instance.x != instance.toXPos || instance.y != instance.toYPos)
-                        {
-                            noneMoving = false;
-                            break;
-                        }
-                    }
-                    if (noneMoving)
-                    {
-                        SetHint();
-                        Game.hintAmount --;
-                        ds_map_replace(Game.dataMap,"hintAmount",Game.hintAmount);
-                        DrawFadeTextHint(-1);
-                        SaveLevel(Game.level);
-                    }
-                }
-                else
-                {
-                    Game.flashHintCount = 6; 
-                }
-            }
-        }
-        
-        if (pressed)
-        {
-            pressed = false;
-            image_index = 0;
-            y -= 9;
-        }
+        audio_play_sound(snd_click,0,false);
+        pressed = true;
+        image_index = 1;
+        y += 9;
     }
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="5">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>ClearButtonSurfaces();
+if (mouse_check_button_released(mb_left))
+{
+    if (ButtonContainsMouse(width,height))
+    {
+        if (pressed &amp;&amp; !Game.levelSolved)
+        {
+            if (Game.hintAmount &gt; 0)
+            {
+                var noneMoving = true;
+                for (var i=0;i&lt;instance_number(obj_letterBox);i++)
+                {
+                    var instance = instance_find(obj_letterBox,i);
+                    if (instance.x != instance.toXPos || instance.y != instance.toYPos)
+                    {
+                        noneMoving = false;
+                        break;
+                    }
+                }
+                if (noneMoving)
+                {
+                    SetHint();
+                    Game.hintAmount --;
+                    ds_map_replace(Game.dataMap,"hintAmount",Game.hintAmount);
+                    DrawFadeTextHint(-1);
+                    SaveLevel(Game.level);
+                }
+            }
+            else
+            {
+                Game.flashHintCount = 6; 
+            }
+        }
+    }
+    
+    if (pressed)
+    {
+        pressed = false;
+        image_index = 0;
+        y -= 9;
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -161,47 +127,33 @@ switch (Game.language)
             <kind>1</kind>
             <string>draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
-draw_set_font(fnt_boxText);
+draw_set_font(fnt_synonymFor);
 
-if (!surface_exists(surface0) || !surface_exists(surface1) || buttonLanguage != Game.language)
+switch (Game.language)
 {
-    buttonLanguage = Game.language;
-    switch (Game.language)
-    {
-        case "English": text = "Hint";      break;
-        case "Dutch":   text = "Tip";       break;
-        case "French":  text = "Indice";    break;
-        case "Swedish":  text = "Ledtråd";  break;
-    }
-    if (string_width(obj_buttonShuffle.text) &gt; string_width(text))
-    {
-        AssignSurfaces(obj_buttonShuffle.text);
-    }
-    else
-    {
-        AssignSurfaces(text);
-    }
+    case "English": text = "Hint";      break;
+    case "Dutch":   text = "Tip";       break;
+    case "French":  text = "Indice";    break;
+    case "Swedish":  text = "Ledtråd";  break;
 }
-
-var surfaceToDraw;
-if (image_index == 0)
+if (width &gt;= obj_buttonShuffle.width || width == -1)
 {
-    surfaceToDraw = surface0;
+    DrawButton(x,y,string_width(text),string_height(text));
 }
 else
 {
-    surfaceToDraw = surface1;
+    width = obj_buttonShuffle.width-1;
+    height = obj_buttonShuffle.height-1;
+    DrawButton(x,y,string_width(obj_buttonShuffle.text),string_height(obj_buttonShuffle.text));
 }
-
-draw_surface(surfaceToDraw,x-surface_get_width(surfaceToDraw)/2,y-surface_get_height(surfaceToDraw)/2+9);
 
 draw_set_color(c_black);
 draw_set_alpha(0.25);
-draw_text(x,y+6,text);
+draw_text_transformed(x,y+3,text,0.7,0.7,0);
 
 draw_set_color(4210752);
 draw_set_alpha(1);
-draw_text(x,y,text);
+draw_text_transformed(x,y,text,0.7,0.7,0);
 </string>
           </argument>
         </arguments>

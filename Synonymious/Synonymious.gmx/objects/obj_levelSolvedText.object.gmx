@@ -25,9 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>size = 10;
-targetSize = 1.5;
-sizeDecreaseSpeed = (size-targetSize)*1.5;
+            <string>size = 4;
+targetSize = 1;
+sizeDecreaseSpeed = (size-targetSize);
 
 alpha = 0;
 targetAlpha = 1;
@@ -135,28 +135,36 @@ else if (shadowSize &lt;= targetShadowSize)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_font(fnt_synonymFor);
+            <string>/*draw_set_font(fnt_synonymFor);
 draw_set_halign(fa_center);
 if (size == targetSize)
 {
     draw_set_color(c_black);
     draw_set_alpha(shadowAlpha);
-    draw_text_transformed(room_width/2,room_height*0.38+5,"SOLVED",shadowSize*1.25,shadowSize*1.25,0);
+    draw_text_transformed(room_width/2,room_height*0.38+5,"SOLVED",shadowSize,shadowSize,0);
 }
 
 draw_set_color(7843840);
 draw_set_alpha(alpha);
-draw_text_transformed(room_width/2,room_height*0.38,"SOLVED",size*1.25,size*1.25,0);
+draw_text_transformed(room_width/2,room_height*0.38,"SOLVED",size,size,0);
+*/
 
+var spr;
 
-/*var solvedText = "SOLVED";
-var drawX = room_width/2-string_width(solvedText)/2*size;
-for (var i=0;i&lt;string_length(solvedText);i++)
+switch (Game.language)
 {
-    var letter = string_copy(solvedText,1,1);
-    draw_text_transformed(drawX,room_height*0.38,letter,size,size,0);
-    drawX += string_width(letter)*size;
+    case "English": spr = spr_solvedTextEnglish;    break;
+    case "Dutch": spr = spr_solvedTextDutch;        break;
+    case "French": spr = spr_solvedTextFrench;      break;
+    case "Swedish": spr = spr_solvedTextSwedish;    break;
 }
+
+if (size == targetSize)
+{
+    draw_sprite_ext(spr,0,room_width/2,room_height*0.38,shadowSize,shadowSize,0,c_gray,shadowAlpha);
+}
+
+draw_sprite_ext(spr,0,room_width/2,room_height*0.38,size,size,0,c_white,alpha);
 </string>
           </argument>
         </arguments>

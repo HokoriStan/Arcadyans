@@ -1,7 +1,6 @@
-var fileName = argument0;
-var file = file_text_open_read(fileName+".txt");
+var file = file_text_open_read(Game.language+"SynonymList.txt");
 
-Game.synonymMap = ds_map_create();
+ds_map_clear(Game.synonymMap);
 Game.keyArray = -1;
 var keyList = ds_list_create();
 var i = 0;

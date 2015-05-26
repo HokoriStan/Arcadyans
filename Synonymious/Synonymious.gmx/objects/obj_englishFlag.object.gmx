@@ -32,7 +32,7 @@ image_speed = 0;
         </arguments>
       </action>
     </event>
-    <event eventtype="6" enumb="56">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -49,73 +49,43 @@ image_speed = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (pressed)
+            <string>if (mouse_check_button_pressed(mb_left))
 {
-    pressed = false;
-    y -= 9;
-    image_index = 0;
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="7">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if (pressed)
-{
-    with (Game)
+    if (ButtonContainsMouse(sprite_width,sprite_height))
     {
-        random_set_seed(0);
-        language = "English";
-        var file = file_text_open_write("GeneralInfo.txt");
-        file_text_write_string(file,language);
-        file_text_close(file);
-        TryLoadDataMap();
-        LoadSynonymMap(string(language)+"SynonymList");
+        audio_play_sound(snd_click,0,false);
+        pressed = true;
+        image_index = 1;
+        y += 9;
     }
-    room_goto(rm_menu);
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="4">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>pressed = true;
-y += 9;
-image_index = 1;
+if (mouse_check_button_released(mb_left))
+{
+    if (ButtonContainsMouse(sprite_width,sprite_height))
+    {
+        if (pressed)
+        {
+            with (Game)
+            {
+                random_set_seed(0);
+                language = "Dutch";
+                var file = file_text_open_write("GeneralInfo.txt");
+                file_text_write_string(file,language);
+                file_text_close(file);
+                TryLoadDataMap();
+                LoadSynonymMap(string(language)+"SynonymList");
+            }
+            room_goto(rm_menu);
+        }
+    }
+    
+    if (pressed)
+    {
+        pressed = false;
+        image_index = 0;
+        y -= 9;
+    }
+}
 </string>
           </argument>
         </arguments>

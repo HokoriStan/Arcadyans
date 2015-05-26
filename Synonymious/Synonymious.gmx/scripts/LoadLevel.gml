@@ -8,6 +8,7 @@ if (ds_map_exists(Game.dataMap,"Level "+string(level)))
     ds_list_clear(hintIndexes);
     var data = ds_map_find_value(Game.dataMap,"Level "+string(level));
     Game.levelSolved = string_char_at(data,1) == "1";
+    show_debug_message("LEVEL SOLVED: "+string(Game.levelSolved));
     data = string_copy(data,2,string_length(data)-1);
 
     while (string_length(data) > 0 && (ord(data) >= 65 || string_char_at(data,1) == " ") )

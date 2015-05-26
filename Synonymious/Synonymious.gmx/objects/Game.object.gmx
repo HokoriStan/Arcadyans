@@ -65,11 +65,14 @@ levelSolved = false;
 levelSelectionPage = 0;
 
 dataMap = ds_map_create();
-TryLoadDataMap();
-
+synonymMap = ds_map_create();
 hintIndexes = ds_list_create();
+TryLoadDataMap();
+LoadSynonymMap();
 
-LoadSynonymMap(language+"SynonymList");
+
+
+
 </string>
           </argument>
         </arguments>
@@ -181,7 +184,15 @@ if (keyboard_check_pressed(vk_backspace) || keyboard_check_pressed(vk_escape))
             }
         break;
         case rm_menu:
-            if (show_question("Are you sure you would like to quit?"))
+            var text;
+            switch (Game.language)
+            {
+                case "English": text = "Are you sure you would like to quit?";  break;
+                case "Dutch":   text = "Weet u zeker dat u wilt stoppen?";      break;
+                case "French":  text = "Etes-vous sûr vous voulez quitter?";    break;
+                case "Swedish": text = "Är du säker på att du vill avsluta?";   break;
+            }
+            if (show_question(text))
             {
                 game_end();
             }
@@ -199,7 +210,6 @@ if (!debug)
 {
     if (mouse_check_button_pressed(mb_left))
     {
-        
         switch (debugClick)
         {
             case 0: 
@@ -437,36 +447,36 @@ else
     
     draw_set_color(c_white);
     draw_set_alpha(1);
-    draw_text(x+20,y+50,"Level "+string(Game.level+1));
+    draw_text(x+15,y+34,"Level "+string(Game.level+1));
     
-    draw_sprite(spr_iconHint,0,x+room_width-85,y+50);
+    draw_sprite(spr_iconHint,0,x+room_width-70,y+34);
     
     var hintText = string(Game.hintAmount);
-    if (Game.hintAmount &lt; 9) {hintText = "0"+hintText;}
+    if (Game.hintAmount &lt;= 9) {hintText = "0"+hintText;}
     if (floor(flashHintCount mod 2) == 1) {draw_set_color(c_red);}
-    draw_text(x+room_width-85,y+50,hintText);
+    draw_text(x+room_width-70,y+34,hintText);
     if (hintFadeTextOffset &lt; 50)
     {
         draw_set_color(hintFadeTextColor);
         draw_set_alpha(1-1/50*hintFadeTextOffset);
         draw_set_halign(fa_right);
-        draw_text(x+room_width-5,y+50+hintFadeTextOffset,hintFadeText);
+        draw_text(x+room_width-5,y+34+hintFadeTextOffset,hintFadeText);
         draw_set_color(c_white);
     }
     draw_set_color(c_white);
     draw_set_alpha(1);
-    draw_sprite(spr_iconLetter,0,x+room_width-230,y+50);
+    draw_sprite(spr_iconLetter,0,x+room_width-173,y+34);
     draw_set_halign(fa_left);
     var removeLetterText = string(Game.removeLetterAmount);
-    if (Game.removeLetterAmount &lt; 9) {removeLetterText = "0"+removeLetterText;}
+    if (Game.removeLetterAmount &lt;= 9) {removeLetterText = "0"+removeLetterText;}
     if (floor(flashRemoveLetterCount mod 2) == 1) {draw_set_color(c_red);}
-    draw_text(x+room_width-230,y+50,removeLetterText);
+    draw_text(x+room_width-173,y+34,removeLetterText);
     if (removeLetterFadeTextOffset &lt; 50)
     {
         draw_set_color(removeLetterFadeTextColor);
         draw_set_alpha(1-1/50*removeLetterFadeTextOffset);
         draw_set_halign(fa_right);
-        draw_text(x+room_width-150,y+50+removeLetterFadeTextOffset,removeLetterFadeText);
+        draw_text(x+room_width-112.5,y+34+removeLetterFadeTextOffset,removeLetterFadeText);
         draw_set_color(c_white);
     }
     
@@ -486,22 +496,22 @@ else
     
     draw_set_color(c_black);
     draw_set_alpha(0.25);
-    draw_text(x+room_width/2,y+room_height*0.15+5,text);
+    draw_text_transformed(x+room_width/2,y+room_height*0.15+5,text,0.8,0.8,0);
     
     draw_set_color(c_white);
     draw_set_alpha(1);
-    draw_text(x+room_width/2,y+room_height*0.15,text);
+    draw_text_transformed(x+room_width/2,y+room_height*0.15,text,0.8,0.8,0);
     
     
     draw_set_font(fnt_synonymFor);
     
     draw_set_color(c_black);
     draw_set_alpha(0.25);
-    draw_text_transformed(x+room_width/2,y+room_height*0.25+8,question,1.25,1.25,0);
+    draw_text(x+room_width/2,y+room_height*0.25+5,question);
     
     draw_set_color(c_white);
     draw_set_alpha(1);
-    draw_text_transformed(x+room_width/2,y+room_height*0.25,question,1.25,1.25,0);
+    draw_text(x+room_width/2,y+room_height*0.25,question);
     
     if (debug)
     {
@@ -517,14 +527,16 @@ else if (room == rm_menu)
     draw_set_valign(fa_middle);
     draw_set_font(fnt_synonymFor);
     
-    draw_set_color(c_black);
+    draw_sprite(spr_title,0,room_width/2,room_height*0.15);
+    
+    /*draw_set_color(c_black);
     draw_set_alpha(0.25);
-    draw_text_transformed(room_width/2,room_height*0.15+8,"Synonymious",1.25,1.25,10);
+    draw_text_transformed(room_width/2,room_height*0.15+8,"Synonymious",1,1,10);
     
     draw_set_color(c_white);
     draw_set_alpha(1);
-    draw_text_transformed_colour(room_width/2,room_height*0.15,"Synonymious",1.25,1.25,10,c_white,15790320,c_white,15132390,1); 
-}
+    draw_text_transformed_colour(room_width/2,room_height*0.15,"Synonymious",1,1,10,c_white,15790320,c_white,15132390,1);
+*/}
 else if (room == rm_levelSelect)
 {
     draw_set_halign(fa_center);

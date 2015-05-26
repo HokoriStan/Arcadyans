@@ -7,7 +7,7 @@ var yOffset = sprite_get_height(spr_buttonSquareSmall)+spacing;
 
 var centerX = room_width/2;
 var leftXPos = centerX - (horizontalLevels/2 * xOffset) + xOffset/2;
-var topYPos = 450;
+var topYPos = 325;
 
 with (obj_buttonLevel)
 {

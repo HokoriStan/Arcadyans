@@ -8,6 +8,7 @@ if (file_exists(string(Game.language)+"Data.txt"))
     
     if (dataMap != -1)
     {
+        ds_map_destroy(Game.dataMap);
         Game.dataMap = dataMap;
         Game.removeLetterAmount = ds_map_find_value(Game.dataMap,"removeLetterAmount");
         Game.hintAmount = ds_map_find_value(Game.dataMap,"hintAmount");
@@ -15,7 +16,7 @@ if (file_exists(string(Game.language)+"Data.txt"))
     }
     file_text_close(file);
 }
-Game.dataMap = ds_map_create();
+ds_map_clear(Game.dataMap);
 Game.removeLetterAmount = 3;
 Game.hintAmount = 3;
 ds_map_add(Game.dataMap,"removeLetterAmount",Game.removeLetterAmount);

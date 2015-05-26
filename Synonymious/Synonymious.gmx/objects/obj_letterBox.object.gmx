@@ -73,6 +73,7 @@ moveSpeed = originalMoveSpeed;
         {
             if (collision_point(device_mouse_x(i),device_mouse_y(i),id,false,false))
             {
+                audio_play_sound(snd_click,0,false);
                 LetterBoxClick(id);
                 break;
             }

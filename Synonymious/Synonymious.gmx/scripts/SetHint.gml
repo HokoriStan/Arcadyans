@@ -15,7 +15,6 @@ if (argument_count == 0)
 }
 else
 {
-    show_debug_message("Setting hint to index: "+string(argument[0]));
     index = argument[0];
 }
 
@@ -66,7 +65,6 @@ if (argument_count > 0)
     if (instance_exists(obj_levelSolvedText))
     {
         obj_levelSolvedText.nextLevel = false;
-        show_debug_message("TRUE");
     }
 }
 with (obj_inputBox)

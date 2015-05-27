@@ -3,8 +3,8 @@
   <caption></caption>
   <width>576</width>
   <height>975</height>
-  <vsnap>30</vsnap>
-  <hsnap>288</hsnap>
+  <vsnap>50</vsnap>
+  <hsnap>144</hsnap>
   <isometric>0</isometric>
   <speed>60</speed>
   <persistent>0</persistent>
@@ -50,13 +50,7 @@
     <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
     <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
   </views>
-  <instances>
-    <instance objName="obj_buttonPlay" x="288" y="360" name="inst_6BA4F6EB" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_buttonQuit" x="288" y="840" name="inst_03592B19" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_buttonResetProgress" x="288" y="480" name="inst_0E07D2FD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_buttonLanguageSelection" x="288" y="600" name="inst_1B113657" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_buttonCredits" x="288" y="720" name="inst_480481EE" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-  </instances>
+  <instances/>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
   <PhysicsWorldTop>0</PhysicsWorldTop>

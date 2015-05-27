@@ -109,7 +109,7 @@ switch (Game.language)
 {
     case "English": text = "Change language";   break;
     case "Dutch":   text = "Wijzig taal";       break;
-    case "French":  text = "Changer langue";    break;
+    case "French":  text = "Changer de langue"; break;
     case "Swedish":  text = "Ändra språk";      break;
 }
 DrawButton(x,y,string_width(text),string_height(text));

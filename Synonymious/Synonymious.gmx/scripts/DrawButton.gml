@@ -1,17 +1,19 @@
-var xPos = argument0;
-var yPos = argument1 + 5;
+var xPos = argument[0];
+var yPos = argument[1] + 5;
 
-var textWidth = round(argument2*0.7 - 25);
-var textHeight = round(argument3*0.7 - 36);
-var textHeight = 34;
-/*if ((textWidth & 1))
+var textWidth = round(argument[2]*0.7 - 25);
+var textHeight = round(argument[3]*0.7 - 36);
+var isMessage = false;
+var isQuestion = false;
+if (argument_count < 5)
 {
-    textWidth++;
+    var textHeight = 34;
 }
-if ((textHeight & 1))
+else
 {
-    textHeight++;
-}*/
+    isMessage = argument[4];
+    isQuestion = argument[5];
+}
 
 var cornerWidth = sprite_get_width(spr_buttonTopLeft);
 var cornerHeight = sprite_get_height(spr_buttonTopLeft);
@@ -42,13 +44,16 @@ draw_sprite_custom(spr_blankSprite,0,xPos+65,yPos+64.5);*/
 
 var leftXPos = xPos - textWidth/2 - cornerWidth;
 var topYPos = yPos - textHeight/2 - cornerHeight;
-
-draw_sprite_custom(spr_buttonTopLeft,0,leftXPos,topYPos);
-
+var color = c_white;
+if (isMessage)
+{
+    color = c_black;
+}
+draw_sprite_ext_custom(spr_buttonTopLeft,0,leftXPos,topYPos,1,1,0,color,1);
 var rightXPos = xPos + textWidth/2 + cornerWidth;
 var topYPos = yPos - textHeight/2 - cornerHeight;
 
-draw_sprite_ext_custom(spr_buttonTopLeft,0,rightXPos,topYPos,-1,1,0,c_white,1);
+draw_sprite_ext_custom(spr_buttonTopLeft,0,rightXPos,topYPos,-1,1,0,color,1);
 
 if (!pressed)
 {
@@ -87,6 +92,11 @@ if (pressed)
 
 draw_set_color(c_white);
 draw_rectangle_custom(leftCenterXPos,topYPos,rightCenterXPos,bottomCenterYPos,false);
+if (isMessage)
+{
+    draw_set_color(c_black);
+    draw_rectangle_custom(leftCenterXPos,topYPos,rightCenterXPos,topYPos+40,false);
+}
 
 if (!pressed)
 {
@@ -104,6 +114,11 @@ var bottomCenterYPos = yPos + textHeight/2;
 
 draw_set_color(c_white);
 draw_rectangle_custom(leftXPos,topCenterYPos,leftCenterXPos,bottomCenterYPos,false);
+if (isMessage)
+{
+    draw_set_color(c_black);
+    draw_rectangle_custom(leftXPos,topCenterYPos,leftCenterXPos,topCenterYPos+40-cornerHeight+1,false);
+}
 
 var rightCenterXPos = xPos + textWidth/2;
 var topCenterYPos = yPos - textHeight/2-1;
@@ -112,3 +127,19 @@ var bottomCenterYPos = yPos + textHeight/2;
 
 draw_set_color(c_white);
 draw_rectangle_custom(rightCenterXPos,topCenterYPos,rightXPos,bottomCenterYPos,false);
+if (isMessage)
+{
+    draw_set_color(c_black);
+    draw_rectangle_custom(rightCenterXPos,topCenterYPos,rightXPos,topCenterYPos+40-cornerHeight+1,false);
+    
+    draw_set_color(c_white);
+    draw_set_valign(fa_middle);
+    draw_set_halign(fa_center);
+    var text = "Message"
+    if (isQuestion)
+    {
+        text = "Question";
+    }
+    draw_text_transformed(xPos,yPos-textHeight/2,text,0.3,0.3,0);
+    draw_set_valign(fa_middle);
+}

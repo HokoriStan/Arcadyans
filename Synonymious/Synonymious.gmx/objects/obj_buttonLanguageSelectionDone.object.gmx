@@ -68,19 +68,7 @@ if (mouse_check_button_released(mb_left))
     {
         if (pressed)
         {
-            var text;
-            switch (Game.language)
-            {
-                case "English": text = "Are you sure you# would like to quit?";  break;
-                case "Dutch":   text = "Weet u zeker dat# u wilt stoppen?";      break;
-                case "French":  text = "Etes-vous sûr# vous voulez quitter?";    break;
-                case "Swedish": text = "Är du säker på att# du vill avsluta?";   break;
-            }
-            ShowMessage(text,true,MessageActionQuit);
-            /*if (show_question(text))
-            {
-                game_end();
-            }*/
+            room_goto(rm_menu);
         }
     }
     
@@ -119,20 +107,20 @@ draw_set_font(fnt_synonymFor);
 
 switch (Game.language)
 {
-    case "English": text = "Quit";      break;
-    case "Dutch":   text = "Afsluiten"; break;
-    case "French":  text = "Quitter";   break;
-    case "Swedish":  text = "Avsluta";  break;
+    case "English": text = "Done";  break;
+    case "Dutch":   text = "Klaar"; break;
+    case "French":  text = "Fini";  break;
+    case "Swedish":  text = "Klar"; break;
 }
-DrawButton(x,y,string_width(text),string_height(text));
+DrawButton(x,y,string_width(text)*1.426+50,string_height(text)*1.426+50);
 
 draw_set_color(c_black);
 draw_set_alpha(0.25);
-draw_text_transformed(x,y+3,text,0.7,0.7,0);
+draw_text_transformed(x,y+3,text,1,1,0);
 
 draw_set_color(4210752);
 draw_set_alpha(1);
-draw_text_transformed(x,y,text,0.7,0.7,0);
+draw_text_transformed(x,y,text,1,1,0);
 </string>
           </argument>
         </arguments>

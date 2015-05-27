@@ -167,13 +167,23 @@ if (flashRemoveLetterCount &gt; 0)
 
 if (keyboard_check_pressed(vk_space))
 {
-    with (instance_create(0,0,obj_surfaceCopy))
+    if (room == rm_game &amp;&amp; Game.level &lt; array_length_1d(Game.keyArray)-1)
     {
-        dir = 1;
-        event_perform(ev_step,0);
+        Swipe(1);
+        Game.level ++;
+        Game.levelSolved = false;
+        with (obj_inputBox)
+        {
+            instance_destroy();
+        }
+        with (obj_letterBox)
+        {
+            instance_destroy();
+        }
+        CreateLevel(Game.level);
     }
 }
-if (keyboard_check_pressed(vk_backspace) || keyboard_check_pressed(vk_escape))
+if ( (keyboard_check_pressed(vk_backspace) || keyboard_check_pressed(vk_escape)) &amp;&amp; !instance_exists(obj_message))
 {
     switch (room)
     {
@@ -187,20 +197,20 @@ if (keyboard_check_pressed(vk_backspace) || keyboard_check_pressed(vk_escape))
             var text;
             switch (Game.language)
             {
-                case "English": text = "Are you sure you would like to quit?";  break;
-                case "Dutch":   text = "Weet u zeker dat u wilt stoppen?";      break;
-                case "French":  text = "Etes-vous sûr vous voulez quitter?";    break;
-                case "Swedish": text = "Är du säker på att du vill avsluta?";   break;
+                case "English": text = "Are you sure you# would like to quit?";  break;
+                case "Dutch":   text = "Weet u zeker dat# u wilt stoppen?";      break;
+                case "French":  text = "Etes-vous sûr# vous voulez quitter?";    break;
+                case "Swedish": text = "Är du säker på att# du vill avsluta?";   break;
             }
-            if (show_question(text))
-            {
-                game_end();
-            }
+            ShowMessage(text,true,MessageActionQuit);
         break;
         case rm_levelSelect:
             room_goto(rm_menu);
         break;
         case rm_languageSelection:
+            room_goto(rm_menu);
+        break;
+        case rm_credits:
             room_goto(rm_menu);
         break;
     }
@@ -443,40 +453,51 @@ else
     draw_set_halign(fa_left);
     draw_set_valign(fa_middle);
     
-    draw_set_font(fnt_boxText);
+    draw_set_font(fnt_synonymFor);
+    
+    var text;
+    switch (Game.language)
+    {
+        case "English": text = "Level ";    break;
+        case "Dutch":   text = "Level ";    break;
+        case "French":  text = "Niveau ";   break;
+        case "Swedish":  text = "Nivå ";    break;
+    }
     
     draw_set_color(c_white);
     draw_set_alpha(1);
-    draw_text(x+15,y+34,"Level "+string(Game.level+1));
+    DrawTextShadow(x+15,y+45,text+string(Game.level+1),4,0.7);
     
-    draw_sprite(spr_iconHint,0,x+room_width-70,y+34);
+    draw_set_font(fnt_synonymFor);
+    
+    draw_sprite(spr_iconHint,0,x+room_width-90,y+45);
     
     var hintText = string(Game.hintAmount);
     if (Game.hintAmount &lt;= 9) {hintText = "0"+hintText;}
     if (floor(flashHintCount mod 2) == 1) {draw_set_color(c_red);}
-    draw_text(x+room_width-70,y+34,hintText);
+    DrawTextShadow(x+room_width-85,y+45,hintText,4,0.7);
     if (hintFadeTextOffset &lt; 50)
     {
         draw_set_color(hintFadeTextColor);
         draw_set_alpha(1-1/50*hintFadeTextOffset);
         draw_set_halign(fa_right);
-        draw_text(x+room_width-5,y+34+hintFadeTextOffset,hintFadeText);
+        draw_text_transformed(x+room_width-5,y+45+hintFadeTextOffset,hintFadeText,0.7,0.7,0);
         draw_set_color(c_white);
     }
     draw_set_color(c_white);
     draw_set_alpha(1);
-    draw_sprite(spr_iconLetter,0,x+room_width-173,y+34);
+    draw_sprite(spr_iconLetter,0,x+room_width-245,y+45);
     draw_set_halign(fa_left);
     var removeLetterText = string(Game.removeLetterAmount);
     if (Game.removeLetterAmount &lt;= 9) {removeLetterText = "0"+removeLetterText;}
     if (floor(flashRemoveLetterCount mod 2) == 1) {draw_set_color(c_red);}
-    draw_text(x+room_width-173,y+34,removeLetterText);
+    DrawTextShadow(x+room_width-240,y+45,removeLetterText,4,0.7);
     if (removeLetterFadeTextOffset &lt; 50)
     {
         draw_set_color(removeLetterFadeTextColor);
         draw_set_alpha(1-1/50*removeLetterFadeTextOffset);
         draw_set_halign(fa_right);
-        draw_text(x+room_width-112.5,y+34+removeLetterFadeTextOffset,removeLetterFadeText);
+        draw_text_transformed(x+room_width-161,y+45+removeLetterFadeTextOffset,removeLetterFadeText,0.7,0.7,0);
         draw_set_color(c_white);
     }
     
@@ -582,6 +603,93 @@ else if (room == rm_languageSelection)
     draw_set_color(c_white);
     draw_set_alpha(1);
     draw_text_transformed_colour(room_width/2,room_height*0.15,text,1,1,0,c_white,15790320,c_white,15132390,1); 
+}
+else if (room == rm_credits)
+{
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_middle);
+    draw_set_font(fnt_synonymFor);
+    
+    var text;
+    switch (Game.language)
+    {
+        case "English": text = "Credits";   break;
+        case "Dutch":   text = "Credits";   break;
+        case "French":  text = "Crédits";   break;
+        case "Swedish":  text = "Krediter"; break;
+    }
+    
+    draw_set_color(c_black);
+    draw_set_alpha(0.25);
+    draw_text_transformed(room_width/2,room_height*0.1+8,text,1,1,0);
+    
+    draw_set_color(c_white);
+    draw_set_alpha(1);
+    draw_text_transformed_colour(room_width/2,room_height*0.1,text,1,1,0,c_white,15790320,c_white,15132390,1); 
+    
+    switch (Game.language)
+    {
+        case "English": text = "Programmer";       break;
+        case "Dutch":   text = "Programmeur";      break;
+        case "French":  text = "Programmeur";      break;
+        case "Swedish":  text = "Programmerare";   break;
+    }
+    draw_set_color(c_black);
+    draw_set_alpha(0.25);
+    draw_text_transformed(room_width/2,room_height*0.3+4,"Rick Rosendaal",0.9,0.9,0);
+    draw_set_color(c_white);
+    draw_set_alpha(1);
+    draw_text_transformed_colour(room_width/2,room_height*0.3,"Rick Rosendaal",0.9,0.9,0,c_white,15790320,c_white,15132390,1);
+    draw_set_color(15790320);
+    draw_text_transformed(room_width/2,room_height*0.35,text,0.4,0.4,0);
+    
+    switch (Game.language)
+    {
+        case "English": text = "Designer";       break;
+        case "Dutch":   text = "Designer";      break;
+        case "French":  text = "Designer";      break;
+        case "Swedish":  text = "Designer";   break;
+    }
+    draw_set_color(c_black);
+    draw_set_alpha(0.25);
+    draw_text_transformed(room_width/2,room_height*0.45+4,"Stan van Houten",0.7,0.7,0);
+    draw_set_color(c_white);
+    draw_set_alpha(1);
+    draw_text_transformed_colour(room_width/2,room_height*0.45,"Stan van Houten",0.7,0.7,0,c_white,15790320,c_white,15132390,1);
+    draw_set_color(15790320);
+    draw_text_transformed(room_width/2,room_height*0.5,text,0.35,0.35,0);
+    
+    switch (Game.language)
+    {
+        case "English": text = "Translation (French)";      break;
+        case "Dutch":   text = "Vertaling (Frans)";         break;
+        case "French":  text = "Traduction (Français)";     break;
+        case "Swedish":  text = "Översättning (franska)";   break;
+    }
+    draw_set_color(c_black);
+    draw_set_alpha(0.25);
+    draw_text_transformed(room_width/2,room_height*0.65+4,"Rosa van der Horst",0.5,0.5,0);
+    draw_set_color(c_white);
+    draw_set_alpha(1);
+    draw_text_transformed_colour(room_width/2,room_height*0.65,"Rosa van den Horst",0.5,0.5,0,c_white,15790320,c_white,15132390,1);
+    draw_set_color(15790320);
+    draw_text_transformed(room_width/2,room_height*0.7,text,0.3,0.3,0);
+    
+    switch (Game.language)
+    {
+        case "English": text = "Translation (Swedish)";     break;
+        case "Dutch":   text = "Vertaling (Zweeds)";        break;
+        case "French":  text = "Traduction (Suédois)";      break;
+        case "Swedish":  text = "Översättning (Svenska)";   break;
+    }
+    draw_set_color(c_black);
+    draw_set_alpha(0.25);
+    draw_text_transformed(room_width/2,room_height*0.8+4,"Alicia Jakobsson",0.5,0.5,0);
+    draw_set_color(c_white);
+    draw_set_alpha(1);
+    draw_text_transformed_colour(room_width/2,room_height*0.8,"Alicia Jakobsson",0.5,0.5,0,c_white,15790320,c_white,15132390,1);
+    draw_set_color(15790320);
+    draw_text_transformed(room_width/2,room_height*0.85,text,0.3,0.3,0);
 }
 </string>
           </argument>

@@ -55,7 +55,7 @@
     <instance objName="obj_englishFlag" x="144" y="450" name="inst_8FBC729D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_frenchFlag" x="144" y="650" name="inst_0E50E543" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_swedishFlag" x="432" y="650" name="inst_AD342CFB" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_languageSelectionDone" x="288" y="850" name="inst_AAAF8B6B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_buttonLanguageSelectionDone" x="288" y="850" name="inst_AAAF8B6B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

@@ -109,6 +109,8 @@
     <sprite>sprites\spr_title</sprite>
     <sprite>sprites\spr_blankSprite</sprite>
     <sprite>sprites\spr_hudbck</sprite>
+    <sprite>sprites\spr_buttonOk</sprite>
+    <sprite>sprites\spr_buttonCancel</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -138,43 +140,60 @@
     <script>scripts\draw_sprite_custom.gml</script>
     <script>scripts\draw_sprite_stretched_custom.gml</script>
     <script>scripts\draw_sprite_ext_custom.gml</script>
+    <script>scripts\DrawTextShadow.gml</script>
+    <scripts name="ShowMessageActions">
+      <script>scripts\MessageActionQuit.gml</script>
+      <script>scripts\MessageActionResetProgress.gml</script>
+      <script>scripts\ShowMessage.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_boxText</font>
     <font>fonts\fnt_synonymFor</font>
   </fonts>
   <objects name="objects">
-    <object>objects\Game</object>
-    <object>objects\obj_inputBox</object>
-    <object>objects\obj_letterBox</object>
-    <object>objects\obj_buttonShuffle</object>
-    <object>objects\obj_buttonHint</object>
-    <object>objects\obj_buttonRemoveLetter</object>
-    <object>objects\obj_circle</object>
-    <object>objects\obj_levelCompletedMessage</object>
-    <object>objects\obj_buttonPlay</object>
-    <object>objects\obj_languageSelectionDone</object>
-    <object>objects\obj_buttonLanguageSelection</object>
-    <object>objects\obj_buttonQuit</object>
-    <object>objects\obj_resetProgress</object>
-    <object>objects\Menu</object>
-    <object>objects\obj_buttonLevel</object>
-    <object>objects\obj_buttonNextPage</object>
-    <object>objects\obj_buttonPreviousPage</object>
-    <object>objects\obj_levelSolvedText</object>
-    <object>objects\obj_surfaceCopy</object>
-    <objects name="Flags">
-      <object>objects\obj_dutchFlag</object>
-      <object>objects\obj_englishFlag</object>
-      <object>objects\obj_frenchFlag</object>
-      <object>objects\obj_swedishFlag</object>
+    <objects name="Game">
+      <object>objects\obj_inputBox</object>
+      <object>objects\obj_buttonHint</object>
+      <object>objects\obj_buttonRemoveLetter</object>
+      <object>objects\obj_letterBox</object>
+      <object>objects\obj_hudbck</object>
+      <object>objects\obj_levelCompletedMessage</object>
+      <object>objects\obj_levelSolvedText</object>
+      <object>objects\obj_buttonShuffle</object>
     </objects>
-    <object>objects\obj_solved</object>
-    <object>objects\obj_hudbck</object>
+    <objects name="Menu">
+      <object>objects\obj_buttonPlay</object>
+      <object>objects\obj_buttonResetProgress</object>
+      <object>objects\obj_buttonLanguageSelection</object>
+      <object>objects\obj_buttonQuit</object>
+      <object>objects\obj_buttonCredits</object>
+      <objects name="LanguageSelection">
+        <object>objects\obj_buttonLanguageSelectionDone</object>
+        <object>objects\obj_frenchFlag</object>
+        <object>objects\obj_englishFlag</object>
+        <object>objects\obj_swedishFlag</object>
+        <object>objects\obj_dutchFlag</object>
+      </objects>
+      <objects name="LevelSelection">
+        <object>objects\obj_buttonLevel</object>
+        <object>objects\obj_buttonNextPage</object>
+        <object>objects\obj_buttonPreviousPage</object>
+      </objects>
+    </objects>
+    <objects name="General">
+      <object>objects\Game</object>
+      <object>objects\obj_circle</object>
+      <object>objects\obj_surfaceCopy</object>
+      <object>objects\obj_message</object>
+      <object>objects\obj_messageButtonOk</object>
+      <object>objects\obj_messageButtonCancel</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_startup</room>
     <room>rooms\rm_languageSelection</room>
+    <room>rooms\rm_credits</room>
     <room>rooms\rm_menu</room>
     <room>rooms\rm_levelSelect</room>
     <room>rooms\rm_game</room>

@@ -125,6 +125,9 @@ else
         SetHint(ds_list_find_value(Game.hintIndexes,i));
     }
 }
-
+if (!levelLoaded)
+{
+    SaveLevel(Game.level);
+}
 ds_list_destroy(letterList);
 ds_list_destroy(answerLetterList);

@@ -52,7 +52,8 @@ height = -1;
             <kind>1</kind>
             <string>if (mouse_check_button_pressed(mb_left))
 {
-    if (collision_point(mouse_x,mouse_y,id,true,false))
+    //if (collision_point(mouse_x,mouse_y,id,true,false))
+    if (point_distance(xstart,ystart,mouse_x,mouse_y) &lt; sprite_width/2)
     {
         audio_play_sound(snd_click,0,false);
         pressed = true;
@@ -62,7 +63,8 @@ height = -1;
 }
 if (mouse_check_button_released(mb_left))
 {
-    if (collision_point(mouse_x,mouse_y,id,true,false))
+    //if (collision_point(mouse_x,mouse_y,id,true,false))
+    if (point_distance(xstart,ystart,mouse_x,mouse_y) &lt; sprite_width/2)
     {
         if (pressed)
         {

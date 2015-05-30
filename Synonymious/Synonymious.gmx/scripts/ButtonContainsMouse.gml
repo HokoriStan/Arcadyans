@@ -9,6 +9,7 @@ if (mouse_x > xstart+5 - width/2 &&
     mouse_y > ystart+5 - height/2 &&
     mouse_y < ystart+5 + height/2)
 {
+    Game.drag = false;
     return true;
 }
 return false;

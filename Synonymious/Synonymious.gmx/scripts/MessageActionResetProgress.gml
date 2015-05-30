@@ -1,4 +1,4 @@
-file_delete(string(Game.language)+"Data.txt");
+file_delete(string(Game.synonymLanguage)+"Data.txt");
 TryLoadDataMap();
 switch (Game.language)
 {

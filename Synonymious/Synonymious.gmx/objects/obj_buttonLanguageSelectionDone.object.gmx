@@ -30,6 +30,7 @@ image_speed = 0;
 buttonLanguage = "";
 width = -1;
 height = -1;
+prefLanguage = Game.language;
 </string>
           </argument>
         </arguments>
@@ -79,6 +80,33 @@ if (mouse_check_button_released(mb_left))
         y -= 9;
     }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (prefLanguage != Game.language)
+{
+    Game.levelSelectionPage = 0;
+}
+Game.synonymLanguage = Game.language;
 </string>
           </argument>
         </arguments>

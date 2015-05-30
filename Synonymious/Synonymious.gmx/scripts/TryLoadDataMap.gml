@@ -1,7 +1,7 @@
 var dataMap;
-if (file_exists(string(Game.language)+"Data.txt"))
+if (file_exists(string(Game.synonymLanguage)+"Data.txt"))
 {
-    var file = file_text_open_read(string(Game.language)+"Data.txt");
+    var file = file_text_open_read(string(Game.synonymLanguage)+"Data.txt");
     var encodedMap = file_text_read_string(file);
     file_text_close(file);
     dataMap = json_decode(encodedMap);

@@ -1,4 +1,4 @@
-var file = file_text_open_read(Game.language+"SynonymList.txt");
+var file = file_text_open_read(Game.synonymLanguage+"SynonymList.txt");
 
 ds_map_clear(Game.synonymMap);
 Game.keyArray = -1;
@@ -39,7 +39,7 @@ for (var i=0;i<ds_list_size(keyList);i++)
 ds_list_destroy(keyList);
 file_text_close(file);
 
-/*var file = file_text_open_write(Game.language+"SynonymListShuffled.txt");
+/*var file = file_text_open_write(Game.synonymLanguage+"SynonymListShuffled.txt");
 for (var i=0;i<array_length_1d(Game.keyArray);i++)
 {
     file_text_write_string(file, Game.keyArray[i] +chr(vk_tab)+ ds_map_find_value(Game.synonymMap,Game.keyArray[i]));

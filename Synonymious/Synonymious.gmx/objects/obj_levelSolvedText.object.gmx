@@ -91,7 +91,7 @@ else if (shadowSize &lt;= targetShadowSize)
     if (shadowAlpha &lt; targetShadowAlpha)
     {
         shadowAlpha = targetShadowAlpha;
-        if (nextLevel)
+        if (nextLevel &amp;&amp; Game.level &lt; array_length_1d(Game.keyArray)-1)
         {
             with (instance_create(0,0,obj_surfaceCopy))
             {
@@ -110,6 +110,10 @@ else if (shadowSize &lt;= targetShadowSize)
             }
             CreateLevel(Game.level);
             instance_destroy();
+        }
+        else if (nextLevel)
+        {
+            room_goto(rm_levelSelect);   
         }
     }
 }

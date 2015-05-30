@@ -57,6 +57,7 @@ image_speed = 0;
         pressed = true;
         image_index = 1;
         y += 9;
+        Game.drag = false;
     }
 }
 if (mouse_check_button_released(mb_left))

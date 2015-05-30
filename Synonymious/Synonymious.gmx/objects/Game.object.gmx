@@ -39,6 +39,7 @@ else
 {
     language = "English";
 }
+synonymLanguage = "English";
 
 removeLetterFadeTextOffset = 0;
 removeLetterFadeText = "+1";
@@ -123,6 +124,93 @@ for (var i=0;i&lt;6;i++)
 tapPos = 0;
 drag = false;
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Check for page/level swipe
+
+if (mouse_check_button_pressed(mb_left))
+{
+    tapPos = mouse_x;
+    drag = true;
+}
+if (mouse_check_button_released(mb_left))
+{
+    tapPos = mouse_x;
+    drag = false;
+}
+if (!instance_exists(obj_surfaceCopy) &amp;&amp; drag)
+{
+    if (mouse_x-tapPos &gt; 100)
+    {
+        if (room == rm_game &amp;&amp; Game.level &gt; 0)
+        {
+            Swipe(-1);
+            Game.level --;
+            Game.levelSolved = false;
+            with (obj_inputBox)
+            {
+                instance_destroy();
+            }
+            with (obj_letterBox)
+            {
+                instance_destroy();
+            }
+            CreateLevel(Game.level);
+        }
+        else if (room == rm_levelSelect &amp;&amp; instance_exists(obj_buttonPreviousPage))
+        {
+            Swipe(-1);
+            Game.levelSelectionPage --;
+            CreateLevelButtons(Game.levelSelectionPage);
+        }
+        drag = false;
+    }
+    else if (mouse_x-tapPos &lt; -100 &amp;&amp; drag)
+    {
+        if (room == rm_game &amp;&amp; Game.level &lt; array_length_1d(Game.keyArray)-1)
+        {
+            Swipe(1);
+            Game.level ++;
+            Game.levelSolved = false;
+            with (obj_inputBox)
+            {
+                instance_destroy();
+            }
+            with (obj_letterBox)
+            {
+                instance_destroy();
+            }
+            CreateLevel(Game.level);
+        }
+        else if (room == rm_levelSelect &amp;&amp; instance_exists(obj_buttonNextPage))
+        {
+            Swipe(1);
+            Game.levelSelectionPage ++;
+            CreateLevelButtons(Game.levelSelectionPage);
+        }
+        drag = false;
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -284,91 +372,6 @@ if (!debug)
           </argument>
         </arguments>
       </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Check for page/level swipe
-
-if (mouse_check_button_pressed(mb_left))
-{
-    tapPos = mouse_x;
-    drag = true;
-}
-if (mouse_check_button_released(mb_left))
-{
-    tapPos = mouse_x;
-    drag = false;
-}
-if (!instance_exists(obj_surfaceCopy) &amp;&amp; drag)
-{
-    if (mouse_x-tapPos &gt; 100)
-    {
-        if (room == rm_game &amp;&amp; Game.level &gt; 0)
-        {
-            Swipe(-1);
-            Game.level --;
-            Game.levelSolved = false;
-            with (obj_inputBox)
-            {
-                instance_destroy();
-            }
-            with (obj_letterBox)
-            {
-                instance_destroy();
-            }
-            CreateLevel(Game.level);
-        }
-        else if (room == rm_levelSelect &amp;&amp; instance_exists(obj_buttonPreviousPage))
-        {
-            Swipe(-1);
-            Game.levelSelectionPage --;
-            CreateLevelButtons(Game.levelSelectionPage);
-        }
-        drag = false;
-    }
-    else if (mouse_x-tapPos &lt; -100 &amp;&amp; drag)
-    {
-        if (room == rm_game &amp;&amp; Game.level &lt; array_length_1d(Game.keyArray)-1)
-        {
-            Swipe(1);
-            Game.level ++;
-            Game.levelSolved = false;
-            with (obj_inputBox)
-            {
-                instance_destroy();
-            }
-            with (obj_letterBox)
-            {
-                instance_destroy();
-            }
-            CreateLevel(Game.level);
-        }
-        else if (room == rm_levelSelect &amp;&amp; instance_exists(obj_buttonNextPage))
-        {
-            Swipe(1);
-            Game.levelSelectionPage ++;
-            CreateLevelButtons(Game.levelSelectionPage);
-        }
-        drag = false;
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
     </event>
     <event eventtype="7" enumb="4">
       <action>
@@ -466,7 +469,7 @@ else
     
     draw_set_color(c_white);
     draw_set_alpha(1);
-    DrawTextShadow(x+15,y+45,text+string(Game.level+1),4,0.7);
+    DrawTextShadow(x+15,y+45,text+string(Game.level+1),4,0.64);
     
     draw_set_font(fnt_synonymFor);
     
@@ -474,8 +477,12 @@ else
     
     var hintText = string(Game.hintAmount);
     if (Game.hintAmount &lt;= 9) {hintText = "0"+hintText;}
-    if (floor(flashHintCount mod 2) == 1) {draw_set_color(c_red);}
-    DrawTextShadow(x+room_width-85,y+45,hintText,4,0.7);
+    var color = c_white;
+    if (floor(flashHintCount mod 2) == 1)
+    {
+        color = c_red;
+    }
+    DrawTextShadow(x+room_width-85,y+45,hintText,4,0.7,color);
     if (hintFadeTextOffset &lt; 50)
     {
         draw_set_color(hintFadeTextColor);
@@ -490,8 +497,12 @@ else
     draw_set_halign(fa_left);
     var removeLetterText = string(Game.removeLetterAmount);
     if (Game.removeLetterAmount &lt;= 9) {removeLetterText = "0"+removeLetterText;}
-    if (floor(flashRemoveLetterCount mod 2) == 1) {draw_set_color(c_red);}
-    DrawTextShadow(x+room_width-240,y+45,removeLetterText,4,0.7);
+    var color = c_white;
+    if (floor(flashRemoveLetterCount mod 2) == 1)
+    {
+        color = c_red;
+    }
+    DrawTextShadow(x+room_width-240,y+45,removeLetterText,4,0.7,color);
     if (removeLetterFadeTextOffset &lt; 50)
     {
         draw_set_color(removeLetterFadeTextColor);
@@ -664,7 +675,7 @@ else if (room == rm_credits)
         case "English": text = "Translation (French)";      break;
         case "Dutch":   text = "Vertaling (Frans)";         break;
         case "French":  text = "Traduction (Français)";     break;
-        case "Swedish":  text = "Översättning (franska)";   break;
+        case "Swedish":  text = "Översättning (Franska)";   break;
     }
     draw_set_color(c_black);
     draw_set_alpha(0.25);

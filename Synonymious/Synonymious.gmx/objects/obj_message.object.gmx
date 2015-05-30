@@ -67,15 +67,15 @@ height = -1;
 {
     if (question)
     {
-        okButton = instance_create(x-width/2+50,y+height/2-50,obj_messageButtonOk);
+        okButton = instance_create(x-width/2+50,y+height/2-45,obj_messageButtonOk);
         okButton.parent = id;
-        cancelButton = instance_create(x+width/2-50,y+height/2-50,obj_messageButtonCancel);
+        cancelButton = instance_create(x+width/2-50,y+height/2-45,obj_messageButtonCancel);
         cancelButton.parent = id;
         
     }
     else
     {
-        okButton = instance_create(x,y+height/2-50,obj_messageButtonOk);
+        okButton = instance_create(x,y+height/2-45,obj_messageButtonOk);
         okButton.parent = id;
     }
     created = true;
